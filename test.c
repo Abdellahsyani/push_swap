@@ -12,17 +12,17 @@ t_list	*double_linked(t_list **head)
 	t_list *temp = NULL;
 	t_list *head1 = *head;
 	t_list *tmp1 = (*head)->next;
-	while (head1 && head1->next)
+	while (head1)
 	{
-		head1 = head1->next;
 		temp = head1;
+		head1 = head1->next;
 	}
 	temp->next = *head;
 	(*head)->prev = temp;
-
+	temp->prev->next = NULL;
 	temp->prev = NULL;
-	tmp1->next = NULL;
-	return (*head);
+
+	return (temp);
 }
 
 t_list *add_node(t_list **head, int data) {
@@ -54,14 +54,16 @@ int main() {
 	add_node(&head, 6);
 	add_node(&head, 7);
 	add_node(&head, 8);
+	add_node(&head, 9);
+	add_node(&head, 10);
 
 	t_list *temp = head;
 	while (temp) {
 		printf("%d-->", temp->data);
 		temp = temp->next;
 	}
-	printf("NULL\n");
-	double_linked(&head);
+	printf("\n");
+	head = double_linked(&head);
 	while (head)
 	{
 		printf("%d-->", head->data);
