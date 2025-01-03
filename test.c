@@ -7,64 +7,65 @@ typedef struct n_list {
 	int data;
 } t_list;
 
-t_list	*double_linked(t_list *head)
+t_list	*double_linked(t_list **head)
 {
 	t_list *temp = NULL;
-	t_list *head1 = head;
-	t_list *tmp1 = head->next;
-	while (head1)
+	t_list *head1 = *head;
+	t_list *tmp1 = (*head)->next;
+	while (head1 && head1->next)
 	{
 		head1 = head1->next;
 		temp = head1;
 	}
-	temp->next = head;
-	head->prev = temp;
-	head->next = NULL;
+	temp->next = *head;
+	(*head)->prev = temp;
 
-	tmp1->prev = NULL;
-	return (head);
+	temp->prev = NULL;
+	tmp1->next = NULL;
+	return (*head);
 }
 
-t_list	*add_node(t_list *head, int node)
-{
-	t_list *temp = NULL;
+t_list *add_node(t_list **head, int data) {
 	t_list *new_node = malloc(sizeof(t_list));
+	t_list *temp = *head;
 
-	if (!head)
-	{
-		head->data = node;
-		head->next = NULL;
-		head->prev = NULL;
-	}
-	if (head)
-	{
-		while (head)
-		{
-			head = head->next;
-			temp = head;
+	if (!new_node) return NULL; 
+
+	new_node->data = data;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+
+	if (*head == NULL) {
+		*head = new_node;
+	} else {
+		while (temp->next) {
+			temp = temp->next;
 		}
-		new_node->prev = temp;
 		temp->next = new_node;
-		new_node->next = NULL;
+		new_node->prev = temp;
 	}
-	return (head);
+
+	return *head;
 }
 
-int main()
-{
-	int a = 6;
-	int b = 7;
-	int c = 8;
+int main() {
 	t_list *head = NULL;
 
-	add_node(head, a);
-	add_node(head, b);
-	add_node(head, c);
+	add_node(&head, 6);
+	add_node(&head, 7);
+	add_node(&head, 8);
 
+	t_list *temp = head;
+	while (temp) {
+		printf("%d-->", temp->data);
+		temp = temp->next;
+	}
+	printf("NULL\n");
+	double_linked(&head);
 	while (head)
 	{
-		printf("%d-->", *(int *)head->data);
+		printf("%d-->", head->data);
 		head = head->next;
 	}
-	return (0);
+	return 0;
 }
