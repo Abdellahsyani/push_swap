@@ -14,7 +14,7 @@ int	*Quick_sort(int *arr, int low, int high)
 	{
 		int	pivot = arr[high];
 		int 	i = low - 1;
-		int	j = 0;
+		int	j = low;
 		while (j < high)
 		{
 			if (arr[j] < pivot)
