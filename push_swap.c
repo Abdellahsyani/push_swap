@@ -1,20 +1,21 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 
-int	main(int ac, char *av)
+int	main(int ac, char **av)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i = 0;
-	int 	j = 0;
-
+	int i = 1;
 	if (ac > 1)
 	{
-		int	len = strlen(ac);
-		int	pivot = av[0];
-		stack_a = malloc(sizeof(len));
-		while (av[i])
+		while (i < ac)
 		{
+			int to_num = atoi(av[i]);
+			printf("%d\n", to_num);
+			i++;
 		}
 	}
+	else
+		printf("Error\n");
+	return (0);
 }
