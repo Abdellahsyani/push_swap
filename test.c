@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 14:18:05 by asyani            #+#    #+#             */
+/*   Updated: 2025/01/06 14:19:50 by asyani           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -48,7 +60,55 @@ t_list *add_node(t_list **head, int data) {
 	return *head;
 }
 
-int main() {
+
+int	*push_swap(int *stack_a, int low, int high)
+{
+	int	*stack_b = NULL;
+
+	if (low < high)
+	{
+		int	pivot = stack_a[high];
+		int	i = low - 1;
+		int	j = low;
+
+		while (j < high)
+		{
+			if (stack_a[j] < pivot)
+			{
+				i++;
+				swap(&stack_a[i], &stack_a[j]);
+			}
+			j++;
+		}
+		swap(&stack_a[i + 1], &stack_a[high]);
+
+	}
+}
+
+int main(int ac, char **av)
+{
+	t_list *head = NULL;
+	if (ac > 1)
+	{
+		int i = 1;
+		while (i < ac)  
+		{
+			int num = atoi(av[i]);
+			add_node(&head, num); 
+			i++;
+		}
+		t_list *temp = head;
+		while (temp) {
+			printf("%d-->", temp->data);
+			temp = temp->next;
+		}
+		push_swap(&head, 0);
+	}
+	else
+		printf("Error\n");
+	return (0);
+}
+/*int main() {
 	t_list *head = NULL;
 
 	add_node(&head, 6);
@@ -70,4 +130,4 @@ int main() {
 		head = head->next;
 	}
 	return 0;
-}
+}*/

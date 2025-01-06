@@ -2,6 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+typedef struct n_list {
+	struct n_list *next;
+	struct n_list *prev;
+	int	data;
+} t_list;
+
+
+int	*create_list(t_list *head)
+{
+}
 
 void	swap(int *a, int *b)
 {
@@ -30,12 +40,13 @@ int	*push_swap(int *stack_a, int low, int high)
 			j++;
 		}
 		swap(&stack_a[i + 1], &stack_a[high]);
+		create_list(stack_a, )
 		/*int u = low;
 		while (u <= high)
 		{
 			printf("stack_a here: %d\n", stack_a[u]);
 			u++;
-		}*/
+		}
 		int piv = i;
 		stack_b = malloc(sizeof(int) * (piv + 1));
 		int k = 0;
@@ -46,14 +57,7 @@ int	*push_swap(int *stack_a, int low, int high)
 			printf("this is stack_b[%d]: %d\n", k, stack_b[k]);
 			k++;
 			rev--;
-		}
-		int u = low;
-		while (u <= high)
-		{
-			printf("stack_a here: %d\n", stack_a[u]);
-			u++;
-		}
-
+		}*/
 	}
 	return (stack_a);
 }
