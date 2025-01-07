@@ -19,11 +19,17 @@ typedef struct n_list {
 	int data;
 } t_list;
 
-t_list	*double_linked(t_list **head)
+void	swap(int *a, int *b)
+{
+	int swap = *a;
+	*a = *b;
+	*b = swap;
+}
+
+t_list	*rotate_up(t_list **head)
 {
 	t_list *temp = NULL;
 	t_list *head1 = *head;
-	t_list *tmp1 = (*head)->next;
 	while (head1)
 	{
 		temp = head1;
@@ -35,6 +41,10 @@ t_list	*double_linked(t_list **head)
 	temp->prev = NULL;
 
 	return (temp);
+}
+
+t_list	*rotate_down(t_list **head)
+{
 }
 
 t_list *add_node(t_list **head, int data) {
@@ -60,55 +70,86 @@ t_list *add_node(t_list **head, int data) {
 	return *head;
 }
 
-
-int	*push_swap(int *stack_a, int low, int high)
+int	chose_piv(int *arr)
 {
+	int pivot = 0;
+	if ((arr[0] > arr[1] && arr[0] < arr[2]) || (arr[0] < arr[1] && arr[0] > arr[2]))
+		pivot = arr[0];
+	if ((arr[1] > arr[0] && arr[1] < arr[2]) || (arr[1] < arr[0] && arr[1] > arr[2]))
+		pivot = arr[1];
+	else
+		pivot = arr[2];
+	return (pivot);
+}
 
+int	*push_swap(int *stack, int low, int high)
+{
+	t_list	*stack_a = NULL;
+	t_list	*stack_b = NULL;
+
+	int *arr = malloc(sizeof(int) * 3);
+	int midle = (low + high) / 2;
+
+	arr[0] = stack[low];
+	arr[1] = stack[midle];
+	arr[2] = stack[high];
 	if (low < high)
 	{
-		int	pivot = stack_a[high];
+		int	pivot = chose_piv(arr);
+		printf("pivot: %d\n", pivot);
 		int	i = low - 1;
 		int	j = low;
 
 		while (j < high)
 		{
-			if (stack_a[j] < pivot)
+			if (stack[j] < pivot)
 			{
 				i++;
-				swap(&stack_a[i], &stack_a[j]);
+				swap(&stack[i], &stack[j]);
 			}
 			j++;
 		}
-		swap(&stack_a[i + 1], &stack_a[high]);
-		if (stack_a[j] < pivot)
-			add_node(&head, stack_a[j]);
+		swap(&stack[i + 1], &stack[high]);
+		int k = 1;
+		while (k < high)
+		{
+			if (stack[k] < pivot)
+				stack_b = add_node(&stack_b, stack[k]);
+			else if (stack[k] >= pivot)
+				add_node(&stack_a, stack[k]);
+			k++;
+		}
+		t_list *temp = stack_a;
+		while (temp) {
+			printf("%d-->", temp->data);
+			temp = temp->next;
+		}
 
 	}
+	return (stack);
 }
 
 int main(int ac, char **av)
 {
 	t_list *head = NULL;
-	int *arr = malloc(sizeof(int) * (ac - 1))
+	int *arr = malloc(sizeof(int) * (ac - 1));
 	if (ac > 1)
 	{
 		int i = 1;
 		while (i < ac)
 		{
 			arr[i] = atoi(av[i]);
-			push_swap(arr, 0, ac - 1);
-			add_node(&head, num);
 			i++;
 		}
+		push_swap(arr, 0, ac - 1);
 		t_list *temp = head;
 		while (temp) {
 			printf("%d-->", temp->data);
 			temp = temp->next;
 		}
-		push_swap(&head, 0);
 	}
 	else
-		printf("Error\n");
+	printf("Error\n");
 	return (0);
 }
 /*int main() {
