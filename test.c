@@ -63,7 +63,6 @@ t_list *add_node(t_list **head, int data) {
 
 int	*push_swap(int *stack_a, int low, int high)
 {
-	int	*stack_b = NULL;
 
 	if (low < high)
 	{
@@ -81,6 +80,8 @@ int	*push_swap(int *stack_a, int low, int high)
 			j++;
 		}
 		swap(&stack_a[i + 1], &stack_a[high]);
+		if (stack_a[j] < pivot)
+			add_node(&head, stack_a[j]);
 
 	}
 }
@@ -88,13 +89,15 @@ int	*push_swap(int *stack_a, int low, int high)
 int main(int ac, char **av)
 {
 	t_list *head = NULL;
+	int *arr = malloc(sizeof(int) * (ac - 1))
 	if (ac > 1)
 	{
 		int i = 1;
-		while (i < ac)  
+		while (i < ac)
 		{
-			int num = atoi(av[i]);
-			add_node(&head, num); 
+			arr[i] = atoi(av[i]);
+			push_swap(arr, 0, ac - 1);
+			add_node(&head, num);
 			i++;
 		}
 		t_list *temp = head;
