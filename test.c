@@ -58,6 +58,7 @@ t_list	*rotate_down(t_list **head)
 	(*head)->prev = last;
 	last->next = *head;
 	(*head)->next = NULL;
+	temp->prev = NULL;
 	
 	return (last);
 }
@@ -138,6 +139,13 @@ int	*push_swap(int *stack, int low, int high)
 		while (temp) {
 			printf("%d-->", temp->data);
 			temp = temp->next;
+		}
+		printf("\n");
+		t_list *dart = stack_a;
+		dart = rotate_up(&dart);
+		while (dart) {
+			printf("%d-->", dart->data);
+			dart = dart->next;
 		}
 
 	}
