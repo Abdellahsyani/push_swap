@@ -45,6 +45,21 @@ t_list	*rotate_up(t_list **head)
 
 t_list	*rotate_down(t_list **head)
 {
+	t_list *temp = NULL;
+	t_list *last = NULL;
+	t_list *head2 = *head;
+
+	temp = head2->next;
+	while (head2)
+	{
+		last = head2;
+		head2 = head2->next;
+	}
+	(*head)->prev = last;
+	last->next = *head;
+	(*head)->next = NULL;
+	
+	return (last);
 }
 
 t_list *add_node(t_list **head, int data) {
@@ -114,7 +129,7 @@ int	*push_swap(int *stack, int low, int high)
 		while (k < high)
 		{
 			if (stack[k] < pivot)
-				stack_b = add_node(&stack_b, stack[k]);
+				add_node(&stack_b, stack[k]);
 			else if (stack[k] >= pivot)
 				add_node(&stack_a, stack[k]);
 			k++;
