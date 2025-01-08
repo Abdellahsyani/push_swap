@@ -55,12 +55,12 @@ t_list	*rotate_down(t_list **head)
 		last = head2;
 		head2 = head2->next;
 	}
-	(*head)->prev = last;
-	last->next = *head;
-	(*head)->next = NULL;
 	temp->prev = NULL;
+	(*head)->prev = last;
+	(*head)->next = NULL;
+	last->next = *head;
 	
-	return (last);
+	return (temp);
 }
 
 t_list *add_node(t_list **head, int data) {
@@ -135,14 +135,14 @@ int	*push_swap(int *stack, int low, int high)
 				add_node(&stack_a, stack[k]);
 			k++;
 		}
-		t_list *temp = stack_a;
+		t_list *temp = stack_b;
 		while (temp) {
 			printf("%d-->", temp->data);
 			temp = temp->next;
 		}
 		printf("\n");
-		t_list *dart = stack_a;
-		dart = rotate_up(&dart);
+		t_list *dart = stack_b;
+		dart = rotate_down(&dart);
 		while (dart) {
 			printf("%d-->", dart->data);
 			dart = dart->next;
