@@ -120,6 +120,7 @@ t_list	push(int *arr)
 {
 	t_list *head = NULL;
 	t_list *stack_a = NULL;
+	t_list *current = NULL;
 
 	int	i = 0;
 	while (arr[i])
@@ -127,7 +128,10 @@ t_list	push(int *arr)
 		add_node(&stack_a, arr[i]);
 		i++;
 	}
-
+	current = stack_a;
+	while ()
+	{
+	}
 }
 
 int	*push_swap(int *stack, int low, int high)
