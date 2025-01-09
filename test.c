@@ -103,6 +103,7 @@ t_list *add_node(t_list **head, int data) {
 	return *head;
 }
 
+
 int	chose_piv(int *arr)
 {
 	int pivot = 0;
@@ -113,6 +114,20 @@ int	chose_piv(int *arr)
 	else
 		pivot = arr[2];
 	return (pivot);
+}
+
+t_list	push(int *arr)
+{
+	t_list *head = NULL;
+	t_list *stack_a = NULL;
+
+	int	i = 0;
+	while (arr[i])
+	{
+		add_node(&stack_a, arr[i]);
+		i++;
+	}
+
 }
 
 int	*push_swap(int *stack, int low, int high)
