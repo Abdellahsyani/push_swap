@@ -26,6 +26,23 @@ void	swap(int *a, int *b)
 	*b = swap;
 }
 
+t_list	*double_swap(t_list **head)
+{
+	t_list *temp = NULL;
+	t_list *second_node = NULL;
+
+	temp = *head;
+	second_node = (*head)->next;
+
+	temp->next = second_node->next;
+	second_node->next->prev = temp;
+	temp->prev = second_node;
+	second_node->next = temp;
+	second_node->prev = NULL;
+
+	return (second_node);
+}
+
 t_list	*rotate_up(t_list **head)
 {
 	t_list *temp = NULL;
@@ -104,7 +121,10 @@ int	*push_swap(int *stack, int low, int high)
 	t_list	*stack_b = NULL;
 
 	int *arr = malloc(sizeof(int) * 3);
-	int midle = (low + high) / 2;
+	int midle = low + (high - low) / 2;
+	printf("this low: %d\n", low);
+	printf("this high: %d\n", high);
+	printf("this midle: %d\n", midle);
 
 	arr[0] = stack[low];
 	arr[1] = stack[midle];
@@ -142,7 +162,7 @@ int	*push_swap(int *stack, int low, int high)
 		}
 		printf("\n");
 		t_list *dart = stack_b;
-		dart = rotate_down(&dart);
+		dart = double_swap(&dart);
 		while (dart) {
 			printf("%d-->", dart->data);
 			dart = dart->next;
