@@ -103,18 +103,6 @@ t_list *add_node(t_list **head, int data) {
 	return *head;
 }
 
-/*int	chose_piv(int *arr)
-{
-	int pivot = 0;
-	if ((arr[0] > arr[1] && arr[0] < arr[2]) || (arr[0] < arr[1] && arr[0] > arr[2]))
-		pivot = arr[0];
-	if ((arr[1] > arr[0] && arr[1] < arr[2]) || (arr[1] < arr[0] && arr[1] > arr[2]))
-		pivot = arr[1];
-	else
-		pivot = arr[2];
-	return (pivot);
-}*/
-
 t_list	*push_a(t_list **stack_b, t_list *stack_a)
 {
 	t_list	*new_node;
@@ -257,13 +245,13 @@ int main(int ac, char **av)
 	int *arr = malloc(sizeof(int) * (ac - 1));
 	if (ac > 1)
 	{
-		int i = 1;
-		while (i < ac)
+		int i = 0;
+		while (i < ac - 1)
 		{
-			arr[i] = atoi(av[i]);
+			arr[i] = atoi(av[i + 1]);
 			i++;
 		}
-		push_swap(arr, 1, ac - 1);
+		push_swap(arr, 0, ac - 2);
 		t_list *temp = head;
 		while (temp) {
 			printf("%d-->", temp->data);
