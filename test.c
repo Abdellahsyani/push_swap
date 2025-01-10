@@ -76,35 +76,34 @@ t_list	*rotate_down(t_list **head)
 	(*head)->prev = last;
 	(*head)->next = NULL;
 	last->next = *head;
-	
+
 	return (temp);
 }
 
 t_list *add_node(t_list **head, int data) {
-	t_list *new_node = malloc(sizeof(t_list));
-	t_list *temp = *head;
+	t_list *new_node;
+	t_list *temp;
 
-	if (!new_node) return NULL; 
-
+	temp = *head;
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return NULL; 
 	new_node->data = data;
 	new_node->next = NULL;
 	new_node->prev = NULL;
-
-	if (*head == NULL) {
+	if (*head == NULL)
 		*head = new_node;
-	} else {
-		while (temp->next) {
+	else
+	{
+		while (temp->next)
 			temp = temp->next;
-		}
 		temp->next = new_node;
 		new_node->prev = temp;
 	}
-
 	return *head;
 }
 
-
-int	chose_piv(int *arr)
+/*int	chose_piv(int *arr)
 {
 	int pivot = 0;
 	if ((arr[0] > arr[1] && arr[0] < arr[2]) || (arr[0] < arr[1] && arr[0] > arr[2]))
@@ -114,24 +113,88 @@ int	chose_piv(int *arr)
 	else
 		pivot = arr[2];
 	return (pivot);
+}*/
+
+t_list	*push_a(t_list **stack_b, t_list *stack_a)
+{
+	t_list	*new_node;
+	t_list	*current;
+
+	new_node = NULL;
+	current = NULL;
+	if (!stack_b || !*stack_b)
+		return (stack_a);
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return (stack_a);
+	new_node->data = (*stack_b)->data;
+	new_node->next = stack_a;
+	if (stack_a)
+		stack_a->prev = new_node;
+	new_node->prev = NULL;
+	current = *stack_b;
+	*stack_b = (*stack_b)->next;
+	if (*stack_b)
+		(*stack_b)->prev = NULL;
+	free(current);
+	return (new_node);
 }
 
-t_list	push(int *arr)
+t_list	*push_b(t_list **stack_a, t_list *stack_b)
 {
-	t_list *head = NULL;
-	t_list *stack_a = NULL;
-	t_list *current = NULL;
+	t_list	*current;
+	t_list	*new_node;
 
-	int	i = 0;
-	while (arr[i])
-	{
-		add_node(&stack_a, arr[i]);
-		i++;
-	}
-	current = stack_a;
-	while ()
-	{
-	}
+	current = NULL;
+	new_node = NULL;
+	if (!stack_a || !*stack_a)
+		return stack_b;
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return stack_b;
+	new_node->data = (*stack_a)->data;
+	new_node->next = stack_b;
+	if (stack_b)
+		stack_b->prev = new_node;
+	new_node->prev = NULL;
+	current = *stack_a;
+	*stack_a = (*stack_a)->next;
+	if (*stack_a)
+		(*stack_a)->prev = NULL;
+	free(current);
+	return (new_node);
+}
+
+int	chose_piv(int *arr)
+{
+    if ((arr[0] > arr[1] && arr[0] < arr[2]) || 
+        (arr[0] < arr[1] && arr[0] > arr[2]))
+        return arr[0];
+    if ((arr[1] > arr[0] && arr[1] < arr[2]) || 
+        (arr[1] < arr[0] && arr[1] > arr[2]))
+        return arr[1];
+    return arr[2];
+}
+
+int	get_pivot(int *stack, int low, int high)
+{
+	int	*arr;
+	int	middle;
+	int	pivot;
+
+	if (high <= low || high < 0)
+		return stack[low];
+	arr = malloc(sizeof(int) * 3);
+	if (!arr)
+		return stack[low];
+	middle = low + (high - low) / 2;
+	arr[0] = stack[low];
+	arr[1] = stack[middle];
+	arr[2] = stack[high];
+	printf("Selecting pivot from: %d, %d, %d\n", arr[0], arr[1], arr[2]);
+	pivot = chose_piv(arr);
+	free(arr);
+	return pivot;
 }
 
 int	*push_swap(int *stack, int low, int high)
@@ -139,19 +202,11 @@ int	*push_swap(int *stack, int low, int high)
 	t_list	*stack_a = NULL;
 	t_list	*stack_b = NULL;
 
-	int *arr = malloc(sizeof(int) * 3);
-	int midle = low + (high - low) / 2;
-	printf("this low: %d\n", low);
-	printf("this high: %d\n", high);
-	printf("this midle: %d\n", midle);
-
-	arr[0] = stack[low];
-	arr[1] = stack[midle];
-	arr[2] = stack[high];
+	printf("%d %d\n", low, high);
+	int pivot = get_pivot(stack, low , high);
+	printf("pivot: %d\n", pivot);
 	if (low < high)
 	{
-		int	pivot = chose_piv(arr);
-		printf("pivot: %d\n", pivot);
 		int	i = low - 1;
 		int	j = low;
 
@@ -174,19 +229,24 @@ int	*push_swap(int *stack, int low, int high)
 				add_node(&stack_a, stack[k]);
 			k++;
 		}
-		t_list *temp = stack_b;
+		t_list *temp = stack_a;
 		while (temp) {
 			printf("%d-->", temp->data);
 			temp = temp->next;
 		}
 		printf("\n");
-		t_list *dart = stack_b;
-		dart = double_swap(&dart);
+		t_list *dart = NULL;
+		dart = push_b(&stack_a, stack_b);
 		while (dart) {
 			printf("%d-->", dart->data);
 			dart = dart->next;
 		}
-
+		printf("\n");
+		t_list *tem = stack_a;
+		while (tem) {
+			printf("%d-->", tem->data);
+			tem = tem->next;
+		}
 	}
 	return (stack);
 }
@@ -203,7 +263,7 @@ int main(int ac, char **av)
 			arr[i] = atoi(av[i]);
 			i++;
 		}
-		push_swap(arr, 0, ac - 1);
+		push_swap(arr, 1, ac - 1);
 		t_list *temp = head;
 		while (temp) {
 			printf("%d-->", temp->data);
@@ -214,26 +274,3 @@ int main(int ac, char **av)
 	printf("Error\n");
 	return (0);
 }
-/*int main() {
-	t_list *head = NULL;
-
-	add_node(&head, 6);
-	add_node(&head, 7);
-	add_node(&head, 8);
-	add_node(&head, 9);
-	add_node(&head, 10);
-
-	t_list *temp = head;
-	while (temp) {
-		printf("%d-->", temp->data);
-		temp = temp->next;
-	}
-	printf("\n");
-	head = double_linked(&head);
-	while (head)
-	{
-		printf("%d-->", head->data);
-		head = head->next;
-	}
-	return 0;
-}*/
