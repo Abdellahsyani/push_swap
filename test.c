@@ -38,8 +38,7 @@ int	ft_atoi(char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res *= 10;
-		res += str[i] % 10 + '0';
+		res = res * 10 + (str[i] - '0');
 		i++;
 	}
 	return (res * sign);
@@ -151,7 +150,7 @@ t_list	*push_a(t_list **stack_b, t_list *stack_a)
 	if (*stack_b)
 		(*stack_b)->prev = NULL;
 	free(current);
-	current = NULL:
+	current = NULL;
 	return (new_node);
 }
 
@@ -177,7 +176,7 @@ t_list	*push_b(t_list **stack_a, t_list *stack_b)
 	if (*stack_a)
 		(*stack_a)->prev = NULL;
 	free(current);
-	current = NULL:
+	current = NULL;
 	return (new_node);
 }
 
@@ -212,6 +211,27 @@ int	get_pivot(int *stack, int low, int high)
 	free(arr);
 	return pivot;
 }
+
+void	check_stacks(t_list **stack_a, t_list **stack_b) {
+    t_list *curr = *stack_a;
+    t_list *smallest = *stack_a;
+    t_list *temp;
+
+    while (curr) {
+        if (curr->data < smallest->data)
+            smallest = curr;
+        curr = curr->next;
+    }
+    if (smallest != *stack_a) {
+        while (*stack_a != smallest) {
+            *stack_a = rotate_up(stack_a);
+        }
+    }
+    *stack_b = push_b(stack_a, *stack_b);
+    if (*stack_a)
+        check_stacks(stack_a, stack_b);
+}
+
 
 int	*push_swap(int *stack, int low, int high)
 {
@@ -262,6 +282,12 @@ int	*push_swap(int *stack, int low, int high)
 		while (tem) {
 			printf("%d-->", tem->data);
 			tem = tem->next;
+		}
+		t_list *curr = stack_a;
+		check_stacks(&curr, &stack_b);
+		while (curr) {
+			printf("%d-->", curr->data);
+			curr = curr->next;
 		}
 	}
 	return (stack);
