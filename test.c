@@ -19,6 +19,32 @@ typedef struct n_list {
 	int data;
 } t_list;
 
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	sign;
+	int	res;
+
+	i = 0;
+	res = 0;
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res *= 10;
+		res += str[i] % 10 + '0';
+		i++;
+	}
+	return (res * sign);
+}
+
 void	swap(int *a, int *b)
 {
 	int swap = *a;
@@ -125,6 +151,7 @@ t_list	*push_a(t_list **stack_b, t_list *stack_a)
 	if (*stack_b)
 		(*stack_b)->prev = NULL;
 	free(current);
+	current = NULL:
 	return (new_node);
 }
 
@@ -150,18 +177,19 @@ t_list	*push_b(t_list **stack_a, t_list *stack_b)
 	if (*stack_a)
 		(*stack_a)->prev = NULL;
 	free(current);
+	current = NULL:
 	return (new_node);
 }
 
 int	chose_piv(int *arr)
 {
-    if ((arr[0] > arr[1] && arr[0] < arr[2]) || 
-        (arr[0] < arr[1] && arr[0] > arr[2]))
-        return arr[0];
-    if ((arr[1] > arr[0] && arr[1] < arr[2]) || 
-        (arr[1] < arr[0] && arr[1] > arr[2]))
-        return arr[1];
-    return arr[2];
+	if ((arr[0] > arr[1] && arr[0] < arr[2]) || 
+		(arr[0] < arr[1] && arr[0] > arr[2]))
+		return arr[0];
+	if ((arr[1] > arr[0] && arr[1] < arr[2]) || 
+		(arr[1] < arr[0] && arr[1] > arr[2]))
+		return arr[1];
+	return arr[2];
 }
 
 int	get_pivot(int *stack, int low, int high)
