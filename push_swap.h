@@ -13,8 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct n_list {
 	struct n_list *next;
@@ -23,15 +23,23 @@ typedef struct n_list {
 } t_list;
 
 int	ft_atoi(char *str);
-void	swap(int *a, int *b);
-t_list	*double_swap(t_list **head);
-t_list	*rotate_up(t_list **head);
-t_list	*rotate_down(t_list **head);
-t_list *add_node(t_list **head, int data);
-t_list	*push_a(t_list **stack_b, t_list *stack_a);
-t_list	*push_b(t_list **stack_a, t_list *stack_b);
-int	chose_piv(int *arr);
-int	get_pivot(int *stack, int low, int high);
-int	*push_swap(int *stack, int low, int high);
+void	ft_putstr(char *str);
+void	sa(t_list **stack_a);
+void	sb(t_list **stack_b);
+void	ra(t_list **stack_a);
+void	rra(t_list **stack_a);
+void	pb(t_list **stack_a, t_list **stack_b);
+void	pa(t_list **stack_a, t_list **stack_b);
+int	find_median(int a, int b, int c);
+int	count_nodes(t_list *stack);
+int	find_pivot(t_list *stack);
+void	sort_three(t_list **stack);
+void	sort_two(t_list **stack_a);
+void	sort_four(t_list **stack_a, t_list **stack_b);
+int	is_sorted(t_list *stack);
+void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size);
+t_list	*create_node(int data);
+void	add_to_stack(t_list **stack, int data);
+void	free_stack(t_list **stack);
 
 #endif
