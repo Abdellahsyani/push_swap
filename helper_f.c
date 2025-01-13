@@ -10,9 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "push_swap.h"
 
+/**
+ * count_words _ teh function to count how many word we have in the array
+ * @str: the array that we want
+ * @set: the delimeter to count
+ *
+ * return: how many word we have
+ */
 static int	count_words(const char *str, char set)
 {
 	int	i;
@@ -38,6 +44,13 @@ static int	count_words(const char *str, char set)
 	return (count);
 }
 
+/**
+ * ft_fillstr _ function to fill the main array by strings
+ * @s: the strings that we want to fill
+ * @len: the size of the array
+ *
+ * return: dup array filled
+ */
 static char	*ft_fillstr(const char *s, int len)
 {
 	int		i;
@@ -56,6 +69,13 @@ static char	*ft_fillstr(const char *s, int len)
 	return (dup);
 }
 
+/**
+ * ft_free _ function to free array
+ * @dups: array to free
+ * @i: the size of array
+ *
+ * return: NULL
+ */
 static	void	*ft_free(char **dups, int i)
 {
 	while (i > 0)
@@ -67,6 +87,15 @@ static	void	*ft_free(char **dups, int i)
 	return (NULL);
 }
 
+/**
+ * super_split _ helper fucntion to handle parsing
+ * @dup: the full line that we parse
+ * @s: the strings inside the line
+ * @c: the delimeter
+ * @strings_s: the size of line
+ *
+ * return: line parsed
+ */
 static char	**super_split(char **dups, char const *s, char c, int strings_s)
 {
 	int	start;
@@ -94,6 +123,13 @@ static char	**super_split(char **dups, char const *s, char c, int strings_s)
 	return (dups);
 }
 
+/**
+ * ft_split _ the function that parse line
+ * @s: the line that we want to parse
+ * @c: delimeter to parse line
+ *
+ * return: the line parsing
+ */
 char	**ft_split(char const *s, char c)
 {
 	int		strings_s;
