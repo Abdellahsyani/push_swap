@@ -16,7 +16,8 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	int	pivot;
 	int	pushed;
-	int	len;
+	int	rotate_count;
+	int	i;
 
 	// Base cases
 	if (size <= 1 || is_sorted(*stack_a))
@@ -38,19 +39,26 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	}
 	pivot = find_pivot(*stack_a);
 	pushed = 0;
-	len = size;
-	while (len-- > 0 && pushed < size - 1)
+	rotate_count = 0;
+	i = 0;
+	while (i < size)
 	{
 		if ((*stack_a)->data < pivot)
 		{
 			pb(stack_a, stack_b);
 			pushed++;
 		}
-		else if (len > 0)
+		else
+		{
 			ra(stack_a);
+			rotate_count++;
+		}
+		i++;
 	}
-	quick_sort_stack(stack_b, stack_a, pushed);
+	while (rotate_count-- > 0)
+		rra(stack_a);
 	quick_sort_stack(stack_a, stack_b, size - pushed);
+	quick_sort_stack(stack_b, stack_a, pushed);
 	//reverse_stack(stack_b);
 	while (*stack_b)
 		pa(stack_a, stack_b);

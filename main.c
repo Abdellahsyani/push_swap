@@ -194,51 +194,51 @@ void sort_three(t_list **stack)
 		sa(stack);
 	else if (first > second && second > third)
 	{
-		sa(stack);
-		rra(stack);
-	}
+	sa(stack);
+	rra(stack);
+}
 	else if (first > second && second < third && first > third)
 		ra(stack);
 	else if (first < second && second > third && first < third)
 	{
-		sa(stack);
-		ra(stack);
-	}
+	sa(stack);
+	ra(stack);
+}
 	else if (first < second && second > third && first > third)
 		rra(stack);
 }
 
 void sort_two(t_list **stack_a)
 {
-    if (!*stack_a || !(*stack_a)->next)
-        return;
-    if ((*stack_a)->data > (*stack_a)->next->data)
-        sa(stack_a);
+	if (!*stack_a || !(*stack_a)->next)
+		return;
+	if ((*stack_a)->data > (*stack_a)->next->data)
+		sa(stack_a);
 }
 
 void sort_four(t_list **stack_a, t_list **stack_b)
 {
-    t_list *temp = *stack_a;
-    int min = temp->data;
-    int min_pos = 0;
-    int pos = 0;
-    
-    while (temp)
-    {
-        if (temp->data < min)
-        {
-            min = temp->data;
-            min_pos = pos;
-        }
-        pos++;
-        temp = temp->next;
-    }
-    while (min_pos-- > 0)
-        ra(stack_a);
-    
-    pb(stack_a, stack_b);
-    sort_three(stack_a);
-    pa(stack_a, stack_b);
+	t_list *temp = *stack_a;
+	int min = temp->data;
+	int min_pos = 0;
+	int pos = 0;
+
+	while (temp)
+	{
+		if (temp->data < min)
+		{
+			min = temp->data;
+			min_pos = pos;
+		}
+		pos++;
+		temp = temp->next;
+	}
+	while (min_pos-- > 0)
+		ra(stack_a);
+
+	pb(stack_a, stack_b);
+	sort_three(stack_a);
+	pa(stack_a, stack_b);
 }
 
 int is_sorted(t_list *stack)
@@ -252,7 +252,7 @@ int is_sorted(t_list *stack)
 	return 1;
 }
 
-void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
+/*void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	int	pivot;
 	int	pushed;
@@ -294,7 +294,57 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	//reverse_stack(stack_b);
 	while (*stack_b)
 		pa(stack_a, stack_b);
+}*/
+void quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
+{
+	if (size <= 1 || is_sorted(*stack_a))
+		return;
+	if (size == 2)
+	{
+		sort_two(stack_a);
+		return;
+	}
+	if (size == 3)
+	{
+		sort_three(stack_a);
+		return;
+	}
+	if (size == 4)
+	{
+		sort_four(stack_a, stack_b);
+		return;
+	}
+
+	int pivot = find_pivot(*stack_a);
+	printf("pivot: %d\n", pivot);
+	int push_count = 0;
+	int rotate_count = 0;
+	int i = 0;
+
+	while (i < size)
+	{
+		if ((*stack_a)->data < pivot)
+		{
+			pb(stack_a, stack_b);
+			push_count++;
+		}
+		else
+		{
+			ra(stack_a);
+			rotate_count++;
+		}
+		i++;
+	}
+	while (rotate_count-- > 0)
+		rra(stack_a);
+	quick_sort_stack(stack_a, stack_b, size - push_count);
+	quick_sort_stack(stack_b, stack_a, push_count);
+
+	// Move elements back to stack A
+	while (*stack_b)
+		pa(stack_a, stack_b);
 }
+
 
 t_list *create_node(int data)
 {
