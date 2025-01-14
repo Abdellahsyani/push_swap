@@ -1,12 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-
-typedef struct n_list {
-	struct n_list *next;
-	struct n_list *prev;
-	int data;
-} t_list;
+#include "push_swap.h"
 
 void ft_putstr(char *str)
 {
@@ -36,7 +31,7 @@ int ft_atoi(char *str)
 	return (res * sign);
 }
 
-/*void sa(t_list **stack_a)
+void sa(t_list **stack_a)
 {
 	t_list *first, *second;
 
@@ -53,7 +48,7 @@ int ft_atoi(char *str)
 	second->prev = NULL;
 	*stack_a = second;
 	ft_putstr("sa\n");
-}*/
+}
 
 void sb(t_list **stack_b)
 {
@@ -72,7 +67,7 @@ void sb(t_list **stack_b)
 	ft_putstr("sb\n");
 }
 
-/*void ra(t_list **stack_a)
+void ra(t_list **stack_a)
 {
 	if (!*stack_a || !(*stack_a)->next)
 		return ;
@@ -107,7 +102,7 @@ void rra(t_list **stack_a)
 	(*stack_a)->prev = last;
 	*stack_a = last;
 	ft_putstr("rra\n");
-}*/
+}
 
 void pb(t_list **stack_a, t_list **stack_b)
 {
@@ -127,7 +122,7 @@ void pb(t_list **stack_a, t_list **stack_b)
 	ft_putstr("pb\n");
 }
 
-/*void pa(t_list **stack_a, t_list **stack_b)
+void pa(t_list **stack_a, t_list **stack_b)
 {
 	if (!*stack_b)
 		return;
@@ -143,9 +138,9 @@ void pb(t_list **stack_a, t_list **stack_b)
 	*stack_a = first_b;
 	first_b->prev = NULL;
 	ft_putstr("pa\n");
-}*/
+}
 
-/*int find_median(int a, int b, int c)
+int find_median(int a, int b, int c)
 {
 	if ((a >= b && a <= c) || (a <= b && a >= c))
 		return (a);
@@ -184,9 +179,9 @@ int find_pivot(t_list *stack)
 		last = last->next;
 
 	return (find_median(stack->data, mid->data, last->data));
-}*/
+}
 
-/*void sort_three(t_list **stack)
+void sort_three(t_list **stack)
 {
 	int	first;
 	int	second;
@@ -255,7 +250,7 @@ int is_sorted(t_list *stack)
 		stack = stack->next;
 	}
 	return 1;
-}*/
+}
 
 void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
@@ -296,12 +291,12 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	}
 	quick_sort_stack(stack_b, stack_a, pushed);
 	quick_sort_stack(stack_a, stack_b, size - pushed);
-	reverse_stack(stack_b);
+	//reverse_stack(stack_b);
 	while (*stack_b)
 		pa(stack_a, stack_b);
 }
 
-/*t_list *create_node(int data)
+t_list *create_node(int data)
 {
 	t_list *new_node = malloc(sizeof(t_list));
 	if (!new_node)
@@ -354,7 +349,7 @@ void free_stack(t_list **stack)
 		*stack = (*stack)->next;
 		free(temp);
 	}
-}*/
+}
 
 int main(int ac, char **av)
 {

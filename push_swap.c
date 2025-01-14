@@ -1,86 +1,84 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 09:39:50 by asyani            #+#    #+#             */
+/*   Updated: 2025/01/14 09:41:15 by asyani           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct n_list {
-	struct n_list *next;
-	struct n_list *prev;
-	int	data;
-} t_list;
+#include "push_swap.h"
 
-
-int	*create_list(t_list *head)
+void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
-}
+	int	pivot;
+	int	pushed;
+	int	len;
 
-void	swap(int *a, int *b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-int	*push_swap(int *stack_a, int low, int high)
-{
-	int	*stack_b = NULL;
-
-	if (low < high)
+	// Base cases
+	if (size <= 1 || is_sorted(*stack_a))
+		return ;
+	if (size == 2)
 	{
-		int	pivot = stack_a[high];
-		int	i = low - 1;
-		int	j = low;
-
-		while (j < high)
-		{
-			if (stack_a[j] < pivot)
-			{
-				i++;
-				swap(&stack_a[i], &stack_a[j]);
-			}
-			j++;
-		}
-		swap(&stack_a[i + 1], &stack_a[high]);
-		create_list(stack_a, )
-		/*int u = low;
-		while (u <= high)
-		{
-			printf("stack_a here: %d\n", stack_a[u]);
-			u++;
-		}
-		int piv = i;
-		stack_b = malloc(sizeof(int) * (piv + 1));
-		int k = 0;
-		int rev = piv;
-		while (k < piv)
-		{
-			stack_b[k] = stack_a[rev];
-			printf("this is stack_b[%d]: %d\n", k, stack_b[k]);
-			k++;
-			rev--;
-		}*/
+		sort_two(stack_a);
+		return ;
 	}
-	return (stack_a);
+	if (size == 3)
+	{
+		sort_three(stack_a);
+		return ;
+	}
+	if (size == 4)
+	{
+		sort_four(stack_a, stack_b);
+		return ;
+	}
+	pivot = find_pivot(*stack_a);
+	pushed = 0;
+	len = size;
+	while (len-- > 0 && pushed < size - 1)
+	{
+		if ((*stack_a)->data < pivot)
+		{
+			pb(stack_a, stack_b);
+			pushed++;
+		}
+		else if (len > 0)
+			ra(stack_a);
+	}
+	quick_sort_stack(stack_b, stack_a, pushed);
+	quick_sort_stack(stack_a, stack_b, size - pushed);
+	//reverse_stack(stack_b);
+	while (*stack_b)
+		pa(stack_a, stack_b);
 }
 
 int main(int ac, char **av)
 {
-	if (ac > 1)
+	t_list *stack_a = NULL;
+	t_list *stack_b = NULL;
+	int	i;
+	int	size;
+
+	i = 1;
+	if (ac < 2)
 	{
-		int *stack_a = malloc(sizeof(int) * (ac - 1));
-		if (!stack_a)
-			return (1);
-
-		int i = 1;
-		while (i < ac)  
-		{
-			stack_a[i] = atoi(av[i]); 
-			i++;
-		}
-
-		push_swap(stack_a, 0, ac - 1); 
-		free(stack_a); 
+		ft_putstr("Error\n");
+		return 1;
 	}
-	else
-	printf("Error\n");
-	return (0);
+	while (i < ac)
+	{
+		add_to_stack(&stack_a, ft_atoi(av[i]));
+		i++;
+	}
+
+	size = count_nodes(stack_a);
+	quick_sort_stack(&stack_a, &stack_b, size);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
+
+	return 0;
 }

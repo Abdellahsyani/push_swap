@@ -70,7 +70,7 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 	temp = *stack_a;
 	min = temp->data;
 	min_pos = 0;
-	pos = 0
+	pos = 0;
 	while (temp)
 	{
 		if (temp->data < min)
