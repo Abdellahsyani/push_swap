@@ -49,7 +49,7 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 			pushed++;
 		}
 		else
-		{
+	{
 			ra(stack_a);
 			rotate_count++;
 		}
@@ -64,25 +64,46 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 		pa(stack_a, stack_b);
 }
 
+
 int main(int ac, char **av)
 {
 	t_list *stack_a = NULL;
 	t_list *stack_b = NULL;
 	int	i;
 	int	size;
+	char	*v_stack;
 
-	i = 1;
+	int j = 1;
 	if (ac < 2)
 	{
 		ft_putstr("Error\n");
 		return 1;
 	}
-	while (i < ac)
+	while (av[j])
 	{
-		add_to_stack(&stack_a, ft_atoi(av[i]));
+		dup[i++] = ft_split(av[j], ' ');
+		j++;
+	}
+	while (dup[i])
+	{
+		j = 0;
+		while (*dup[j] && *dup[j] >= '0' && *dup[j] <= '9')
+		{
+			if (*dup[j + 1] == '\0')
+			{
+				v_stack = ft_strjoin(v_stack, dup[j]);
+				v_stack = ft_strjoin(v_stack, ' ');
+			}
+			j++;
+		}
 		i++;
 	}
-
+	clean = remove_dup(clean, atoi(v_stack[i]);
+	while (i < ac)
+	{
+		add_to_stack(&stack_a, dup[i]);
+		i++;
+	}
 	size = count_nodes(stack_a);
 	quick_sort_stack(&stack_a, &stack_b, size);
 	free_stack(&stack_a);
