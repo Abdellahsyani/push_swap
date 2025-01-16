@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 10:42:01 by asyani            #+#    #+#             */
-/*   Updated: 2025/01/11 10:46:44 by asyani           ###   ########.fr       */
+/*   Created: 2025/01/16 11:33:46 by asyani            #+#    #+#             */
+/*   Updated: 2025/01/16 11:33:49 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef struct n_list {
 	int data;
 } t_list;
 
+int find_median(t_list *stack, int size);
+void	rb(t_list **stack_b);
+void	revstack(t_list **stack_a, t_list **stack_b);
 int	ft_atoi(char *str);
 void	ft_putstr(char *str);
 void	sa(t_list **stack_a);
@@ -31,7 +34,7 @@ void	ra(t_list **stack_a);
 void	rra(t_list **stack_a);
 void	pb(t_list **stack_a, t_list **stack_b);
 void	pa(t_list **stack_a, t_list **stack_b);
-int	find_median(int a, int b, int c);
+//int	find_median(int a, int b, int c);
 int	count_nodes(t_list *stack);
 int	find_pivot(t_list *stack);
 void	sort_three(t_list **stack);

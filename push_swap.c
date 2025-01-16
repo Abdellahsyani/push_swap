@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
+/*void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	int	pivot;
 	int	pushed;
@@ -49,7 +49,7 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 			pushed++;
 		}
 		else
-	{
+		{
 			ra(stack_a);
 			rotate_count++;
 		}
@@ -59,50 +59,138 @@ void	quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 		rra(stack_a);
 	quick_sort_stack(stack_a, stack_b, size - pushed);
 	quick_sort_stack(stack_b, stack_a, pushed);
-	//reverse_stack(stack_b);
 	while (*stack_b)
+	{
+		//revstack(stack_a, stack_b);
 		pa(stack_a, stack_b);
-}
-static	char	*helper(char *concat, char const *s1, char const *s2)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-	{
-		concat[i] = s1[i];
-		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		concat[i + j] = s2[j];
-		j++;
-	}
-	concat[i + j] = '\0';
-	return (concat);
+}*/
+void quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
+{
+    int pivot;
+    int pushed;
+    int i;
+    
+    // Protect against invalid inputs
+    if (!stack_a || !*stack_a || size <= 0)
+        return;
+
+    // Handle small sizes first
+    if (size <= 1 || is_sorted(*stack_a))
+        return;
+    if (size == 2)
+    {
+        sort_two(stack_a);
+        return;
+    }
+    if (size == 3)
+    {
+        sort_three(stack_a);
+        return;
+    }
+
+    // Find median as pivot to better split the data
+    pivot = find_median(*stack_a, size);
+    pushed = 0;
+
+    // Partition phase
+    for (i = 0; i < size && *stack_a; i++)
+    {
+        if ((*stack_a)->data <= pivot)
+        {
+            pb(stack_a, stack_b);
+            pushed++;
+        }
+        else
+        {
+            ra(stack_a);
+        }
+    }
+
+    // Restore stack_a position
+    for (i = 0; i < (size - pushed) && *stack_a; i++)
+    {
+        rra(stack_a);
+    }
+
+    // Only recurse if we actually partitioned something
+    if (pushed > 0 && pushed < size)
+    {
+        // Sort larger elements in stack_a
+        quick_sort_stack(stack_a, stack_b, size - pushed);
+        
+        // Move smaller elements back and sort them
+        for (i = 0; i < pushed && *stack_b; i++)
+        {
+            pa(stack_a, stack_b);
+        }
+        quick_sort_stack(stack_a, stack_b, pushed);
+    }
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+// Helper function to find median (add this)
+int find_median(t_list *stack, int size)
 {
-	char	*concat;
-	int		s1_size;
-	int		s2_size;
+    t_list *current;
+    int *arr;
+    int i;
+    int median;
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (s2 == NULL)
-		return (ft_strdup(s1));
-	s1_size = ft_strlen(s1);
-	s2_size = ft_strlen(s2);
-	concat = malloc(sizeof(char) * (s1_size + s2_size) + 1);
-	if (!concat)
-		return (NULL);
-	helper(concat, s1, s2);
-	return (concat);
+    // Allocate temporary array
+    arr = (int *)malloc(sizeof(int) * size);
+    if (!arr)
+        return 0;
+
+    // Copy stack values to array
+    current = stack;
+    i = 0;
+    while (current && i < size)
+    {
+        arr[i++] = current->data;
+        current = current->next;
+    }
+
+    // Simple bubble sort to find median
+    for (i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    // Get median value
+    median = arr[size / 2];
+    free(arr);
+    return median;
+}
+
+void	revstack(t_list **stack_a, t_list **stack_b)
+{
+	t_list *temp = *stack_b;
+	int max = temp->data;
+	int max_pos = 0;
+	int pos = 0;
+
+	while (temp)
+	{
+		if (temp->data > max)
+		{
+			max = temp->data;
+			max_pos = pos;
+		}
+		pos++;
+		temp = temp->next;
+	}
+	while (max_pos-- > 0)
+		ra(stack_b);
+
+	pa(stack_a, stack_b);
 }
 
 int main(int ac, char **av)
@@ -111,41 +199,54 @@ int main(int ac, char **av)
 	t_list *stack_b = NULL;
 	int	i;
 	int	size;
-	char	*v_stack;
 
-	int j = 1;
 	if (ac < 2)
 	{
 		ft_putstr("Error\n");
 		return 1;
 	}
-	while (av[j])
+	/*while (av[j])
 	{
-		dup[i++] = ft_split(av[j], ' ');
+		dup[i] = ft_split(av[j], ' ');
+		i++;
 		j++;
 	}
 	while (dup[i])
 	{
 		j = 0;
-		while (*dup[j] && *dup[j] >= '0' && *dup[j] <= '9')
+		while (*dup[j])
 		{
-			if (*dup[j + 1] == '\0')
+			if (*dup[j] >= '0' && *dup[j] <= '9')
 			{
-				v_stack = ft_strjoin(v_stack, dup[j]);
-				v_stack = ft_strjoin(v_stack, ' ');
+				if (*dup[j + 1] == '\0')
+				{
+					v_stack = ft_strjoin(v_stack, dup[i]);
+					v_stack = ft_strjoin(v_stack, );
+				}
+			}
+			else
+			{
+				ft_putstr("Error\n");
+				exit(1);
 			}
 			j++;
 		}
 		i++;
-	}
-	clean = remove_dup(clean, atoi(v_stack[i]);
+	}*/
+	//clean = remove_dup(clean, atoi(v_stack[i]);
+	i = 1;
 	while (i < ac)
 	{
-		add_to_stack(&stack_a, dup[i]);
+		add_to_stack(&stack_a, ft_atoi(av[i]));
 		i++;
 	}
 	size = count_nodes(stack_a);
 	quick_sort_stack(&stack_a, &stack_b, size);
+	while (stack_a)
+	{
+		printf("%d-->", stack_a->data);
+		stack_a = stack_a->next;
+	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 

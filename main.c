@@ -338,7 +338,7 @@ void quick_sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	while (rotate_count-- > 0)
 		rra(stack_a);
 	quick_sort_stack(stack_a, stack_b, size - push_count);
-	quick_sort_stack(stack_b, stack_a, push_count);
+	//quick_sort_stack(stack_b, stack_a, push_count);
 
 	// Move elements back to stack A
 	while (*stack_b)

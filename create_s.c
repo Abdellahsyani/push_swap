@@ -37,10 +37,10 @@ t_list	*create_node(int data)
 void	add_to_stack(t_list **stack, int data)
 {
 	t_list	*new_node;
-	t_list	*temp;
+	//t_list	*temp;
 
 	new_node = create_node(data);
-	temp = *stack;
+	//temp = *stack;
 	if (!new_node)
 		return ;
 	if (!*stack)

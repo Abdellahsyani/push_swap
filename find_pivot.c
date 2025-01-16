@@ -20,14 +20,14 @@
  *
  * return: the meduim one
  */
-int find_median(int a, int b, int c)
+/*int find_median(int a, int b, int c)
 {
 	if ((a >= b && a <= c) || (a <= b && a >= c))
 		return (a);
 	if ((b >= a && b <= c) || (b <= a && b >= c))
 		return (b);
 	return (c);
-}
+}*/
 
 /**
  * count_nodes - fucntion to count how many nodes we have in the satck
@@ -52,7 +52,7 @@ int count_nodes(t_list *stack)
  *
  * return: pivot
  */
-int find_pivot(t_list *stack)
+/*int find_pivot(t_list *stack)
 {
 	int size = count_nodes(stack);
 	if (size <= 1)
@@ -71,5 +71,5 @@ int find_pivot(t_list *stack)
 		last = last->next;
 
 	return (find_median(stack->data, mid->data, last->data));
-}
+}*/
 
