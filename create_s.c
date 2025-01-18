@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:10:42 by asyani            #+#    #+#             */
-/*   Updated: 2025/01/13 18:17:36 by asyani           ###   ########.fr       */
+/*   Updated: 2025/01/17 23:46:37 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_list	*create_node(int data)
 	new_node->data = data;
 	new_node->next = NULL;
 	new_node->prev = NULL;
+	new_node->index = -1;
 	return (new_node);
 }
 
@@ -34,23 +35,25 @@ t_list	*create_node(int data)
  * @stack: the stack that we want to fill
  * @data: the data of node
  */
-void	add_to_stack(t_list **stack, int data)
+void add_to_stack(t_list **stack, int data)
 {
-	t_list	*new_node;
-	//t_list	*temp;
+	t_list *new_node;
 
 	new_node = create_node(data);
-	//temp = *stack;
 	if (!new_node)
 		return ;
 	if (!*stack)
 	{
 		*stack = new_node;
-		return ;
+		return;
 	}
-	new_node->next = *stack;
-	(*stack)->prev = new_node;
-	*stack = new_node;
+	t_list *temp = *stack;
+	while (temp->next)
+	{
+		temp = temp->next;
+	}
+	temp->next = new_node;
+	new_node->prev = temp;
 }
 
 /**
