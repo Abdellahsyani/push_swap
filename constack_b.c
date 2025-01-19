@@ -12,6 +12,24 @@
 
 #include "push_swap.h"
 
+void	rrb(t_list **stack_b)
+{
+	if (!*stack_b || !(*stack_b)->next)
+		return ;
+	t_list *last = *stack_b;
+	t_list *prev_last;
+
+	while (last->next)
+		last = last->next;
+
+	prev_last = last->prev;
+	prev_last->next = NULL;
+	last->next = *stack_b;
+	last->prev = NULL;
+	(*stack_b)->prev = last;
+	*stack_b = last;
+	ft_putstr("rrb\n");
+}
 void	rb(t_list **stack_b)
 {
 	if (!*stack_b || !(*stack_b)->next)
@@ -27,7 +45,7 @@ void	rb(t_list **stack_b)
 	last->next = first;
 	first->prev = last;
 	first->next = NULL;
-	ft_putstr("ra\n");
+	ft_putstr("rb\n");
 }
 /**
  * sb _ function to swap stack b

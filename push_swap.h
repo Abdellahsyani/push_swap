@@ -25,6 +25,7 @@ typedef struct n_list {
 } t_list;
 
 //int find_median(t_list *stack, int size);
+void	rrb(t_list **stack_b);
 t_list	*find_min(t_list **stack_a);
 void index_stack(t_list **stack_a);
 void	rb(t_list **stack_b);

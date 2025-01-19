@@ -49,38 +49,129 @@ int count_elements(t_list *stack) {
     }
     return count;
 }
-void	sort_stack(t_list **stack_a, t_list **stack_b)
+/*void	sort_stack(t_list **stack_a, t_list **stack_b)*/
+/*{*/
+/*	t_list	*current;*/
+/*	int	lower_range = 0;*/
+/*	int	upper_range = 1;*/
+/*	int	size = 0;*/
+/* 	size = count_elements(*stack_a);*/
+/**/
+/*	while (size > 0)*/
+/*	{*/
+/*		if ((*stack_a)->index >= lower_range && (*stack_a)->index < upper_range)*/
+/*		{*/
+/*			pb(stack_a, stack_b);*/
+/*			lower_range++;*/
+/*            		upper_range++;*/
+/*			size--;*/
+/*		}*/
+/*		else if ((*stack_a)->index < lower_range)*/
+/*		{*/
+/*			pb(stack_a, stack_b);*/
+/*			rb(stack_b);*/
+/*			lower_range++;*/
+/*           		 upper_range++;*/
+/*			size--;*/
+/*		}*/
+/*		else if ((*stack_a)->index >= upper_range)*/
+/*		{*/
+/*			ra(stack_a);*/
+/*		}*/
+/*	}*/
+/*}*/
+void    sort_stack(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*current;
-	int	lower_range = 0;
-	int	upper_range = 1;
-	int	size = 0;
- 	size = count_elements(*stack_a);
+    int     size;
+    int     chunk_size;
+    int     num_chunks;
+    int     i;
+    int     min_index;
+    int     max_index;
     
-	while (size > 0)
-	{
-		if ((*stack_a)->index >= lower_range && (*stack_a)->index < upper_range)
-		{
-			pb(stack_a, stack_b);
-			lower_range++;
-            		upper_range++;
-			size--;
-		}
-		else if ((*stack_a)->index < lower_range)
-		{
-			pb(stack_a, stack_b);
-			rb(stack_b);
-			lower_range++;
-           		 upper_range++;
-			size--;
-		}
-		else if ((*stack_a)->index >= upper_range)
-		{
-			ra(stack_a);
-		}
-	}
+    size = count_elements(*stack_a);
+    
+    if (size <= 100)
+        chunk_size = size / 5;
+    else
+        chunk_size = size / 10;
+        
+    if (chunk_size < 10)
+        chunk_size = 10;
+        
+    num_chunks = (size + chunk_size - 1) / chunk_size;
+    
+    for (i = 0; i < num_chunks; i++)
+    {
+        min_index = i * chunk_size;
+        max_index = min_index + chunk_size;
+        if (max_index > size)
+            max_index = size;
+            
+        int remaining = 0;
+        t_list *temp = *stack_a;
+        while (temp)
+        {
+            if (temp->index >= min_index && temp->index < max_index)
+                remaining++;
+            temp = temp->next;
+        }
+        
+        while (remaining > 0)
+        {
+            if ((*stack_a)->index >= min_index && (*stack_a)->index < max_index)
+            {
+                pb(stack_a, stack_b);
+                if ((*stack_b)->index < (min_index + max_index) / 2)
+                    rb(stack_b);
+                remaining--;
+            }
+            else
+                ra(stack_a);
+        }
+    }
+    
+    // Push everything back to A in descending order
+    size = count_elements(*stack_b);
+    while (size > 0)
+    {
+        t_list *temp = *stack_b;
+        int max = -1;
+        int max_pos = 0;
+        int curr_pos = 0;
+        
+        // Find the maximum number and its position
+        while (temp)
+        {
+            if (temp->index > max)
+            {
+                max = temp->index;
+                max_pos = curr_pos;
+            }
+            curr_pos++;
+            temp = temp->next;
+        }
+        if (max_pos <= size / 2)
+        {
+            while (max_pos > 0)
+            {
+                rb(stack_b);
+                max_pos--;
+            }
+        }
+        else
+        {
+            while (max_pos < size)
+            {
+                rrb(stack_b);
+                max_pos++;
+            }
+        }
+        
+        pa(stack_a, stack_b);
+        size--;
+    }
 }
-
 int main(int ac, char **av)
 {
 	t_list *stack_a = NULL;
@@ -100,8 +191,14 @@ int main(int ac, char **av)
 		i++;
 	}
 	index_stack(&stack_a);
+
+	/*while (stack_a)*/
+	/*{*/
+	/*	printf("%d[%d]-->", stack_a->data, stack_a->index);*/
+	/*	stack_a = stack_a->next;*/
+	/*}*/
 	sort_stack(&stack_a, &stack_b);
-	t_list *temp = stack_b;
+	t_list *temp = stack_a;
 	while (temp)
 	{
 		printf("%d-->", temp->data);
@@ -112,4 +209,3 @@ int main(int ac, char **av)
 
 	return 0;
 }
-
