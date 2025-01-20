@@ -53,7 +53,7 @@ int	count_elements(t_list *stack)
 	return (count);
 }
 
-void    sort_stack(t_list **stack_a, t_list **stack_b)
+void	to_stack_b(t_list **stack_a, t_list **stack_b)
 {
 	int     size;
 	int     chunk_size;
@@ -63,15 +63,12 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 	int     max_index;
 
 	size = count_elements(*stack_a);
-
 	if (size <= 100)
 		chunk_size = size / 5;
 	else
-		chunk_size = size / 10;
-
+		chunk_size = size / 9;
 	if (chunk_size < 10)
 		chunk_size = 10;
-
 	num_chunks = (size + chunk_size - 1) / chunk_size;
 	i = 0;
 	while (i < num_chunks)
@@ -80,7 +77,6 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 		max_index = min_index + chunk_size;
 		if (max_index > size)
 			max_index = size;
-
 		int remaining = 0;
 		t_list *temp = *stack_a;
 		while (temp)
@@ -89,7 +85,6 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 				remaining++;
 			temp = temp->next;
 		}
-
 		while (remaining > 0)
 		{
 			if ((*stack_a)->index >= min_index && (*stack_a)->index < max_index)
@@ -104,8 +99,12 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 		}
 		i++;
 	}
+}
 
-	// Push everything back to A in descending order
+void    sort_stack(t_list **stack_a, t_list **stack_b)
+{
+	int     size;
+	to_stack_b(stack_a, stack_b);
 	size = count_elements(*stack_b);
 	while (size > 0)
 	{
@@ -113,8 +112,6 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 		int max = -1;
 		int max_pos = 0;
 		int curr_pos = 0;
-
-		// Find the maximum number and its position
 		while (temp)
 		{
 			if (temp->index > max)
@@ -141,7 +138,6 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 				max_pos++;
 			}
 		}
-
 		pa(stack_a, stack_b);
 		size--;
 	}
@@ -156,11 +152,17 @@ int	clean_stack(char *av)
 		i++;
 	while (av[i])
 	{
-		if (av[i] >= '0' && av[i] <= '9')
+		if ((av[i] == '-' || av[i] == '+') && (av[i + 1] >= '0' && av[i + 1] <= '9'))
+			i++;
+		if ((av[i] >= '0' && av[i] <= '9') || av[i] == ' ')
 			i++;
 		else
+			return (1);
+		i++;
 	}
+	return (0);
 }
+
 int main(int ac, char **av)
 {
 	t_list *stack_a = NULL;
@@ -179,6 +181,11 @@ int main(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
+		if (!clean_stack)
+		{
+			ft_putstr("Error\n");
+			exit(1);
+		}
 		int num = ft_atoi(av[i]);
 		add_to_stack(&stack_a, num);
 		i++;
