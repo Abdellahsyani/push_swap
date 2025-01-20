@@ -24,27 +24,32 @@ typedef struct n_list {
 	int index;
 } t_list;
 
-//int find_median(t_list *stack, int size);
-void	rrb(t_list **stack_b);
+/*helper functions to sort stack*/
+int	count_elements(t_list *stack);
 t_list	*find_min(t_list **stack_a);
-void index_stack(t_list **stack_a);
-void	rb(t_list **stack_b);
-void	revstack(t_list **stack_a, t_list **stack_b);
+void	index_stack(t_list **stack_a);
 int	ft_atoi(char *str);
 void	ft_putstr(char *str);
+char	**ft_split(char const *s, char c);
+
+
+/*rotate swap push */
+void	rb(t_list **stack_b);
+void	rrb(t_list **stack_b);
 void	sa(t_list **stack_a);
 void	sb(t_list **stack_b);
 void	ra(t_list **stack_a);
 void	rra(t_list **stack_a);
 void	pb(t_list **stack_a, t_list **stack_b);
 void	pa(t_list **stack_a, t_list **stack_b);
-//int	count_nodes(t_list *stack);
-//int	find_pivot(t_list *stack);
+
+/*functions to sort*/
 void	sort_three(t_list **stack);
 void	sort_two(t_list **stack_a);
 void	sort_four(t_list **stack_a, t_list **stack_b);
-int	is_sorted(t_list *stack);
 void	sort_stack(t_list **stack_a, t_list **stack_b);
+
+/*create stack and free it*/
 t_list	*create_node(int data);
 void	add_to_stack(t_list **stack, int data);
 void	free_stack(t_list **stack);
