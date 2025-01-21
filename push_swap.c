@@ -95,7 +95,7 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 				remaining--;
 			}
 			else
-				ra(stack_a);
+			ra(stack_a);
 		}
 		i++;
 	}
@@ -131,7 +131,7 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 			}
 		}
 		else
-		{
+	{
 			while (max_pos < size)
 			{
 				rrb(stack_b);
@@ -146,42 +146,54 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 int	clean_stack(char *av)
 {
 	int	i;
+	int	sign = 0;
 
 	i = 0;
 	while (av[i] == ' ' || av[i] == '\t')
 		i++;
 	while (av[i])
 	{
-		if ((av[i] == '-' || av[i] == '+') && (av[i + 1] >= '0' && av[i + 1] <= '9'))
+		if (av[i] == '-' || av[i] == '+')
+		{
+			if (sign == 1)
+				return (1);
+			sign = 1;
 			i++;
+			continue;
+		}
 		if ((av[i] >= '0' && av[i] <= '9') || av[i] == ' ')
+		{
+			if (av[i] == ' ')
+			{
+				i++;
+				continue;
+			}
 			i++;
+		}
 		else
 			return (1);
-		i++;
 	}
 	return (0);
 }
 
-int	check_dup(char *av)
+int	check_dup(t_list *stack_a)
 {
-	int	i;
 	int	dup_num;
+	t_list	*temp;
 
-	dup_num = 0;
-	// 4 5 8 7 9 2 5 4 1 2 5 4 1 2 45
-	while (av[dup_num])
+	while (stack_a)
 	{
-		i = dup_num + 1;
-		while (av[i])
+		dup_num = stack_a->data;
+		temp = stack_a->next;
+		while (temp)
 		{
-			if (av[i] == av[dup_num])
+			if (temp->data == dup_num)
 			{
 				return (1);
 			}
-			i++;
+			temp = temp->next;
 		}
-		dup_num++;
+		stack_a = stack_a->next;
 	}
 	return (0);
 }
@@ -192,27 +204,38 @@ int main(int ac, char **av)
 	t_list *stack_b = NULL;
 	int	i;
 	char **dup;
-	
-	if (ac > 1)
+
+	if (ac == 1)
 	{
-		i = 0;
-		while (av[i])
-		{
-			clean_stack(av[i]);
-			i++;
-		}
+		return (0);
 	}
 	i = 1;
-	while (i < ac)
+	while (av[i])
 	{
-		if (!clean_stack)
+		if (clean_stack(av[i]) != 0)
 		{
 			ft_putstr("Error\n");
 			exit(1);
 		}
-		int num = ft_atoi(av[i]);
-		add_to_stack(&stack_a, num);
 		i++;
+	}
+	i = 1;
+	while (i < ac)
+	{
+		dup = ft_split(av[i], ' ');
+		int j = 0;
+		while (dup[j])
+		{
+			int num = ft_atoi(dup[j]);
+			add_to_stack(&stack_a, num);
+			j++;
+		}
+		i++;
+	}
+	if (check_dup(stack_a) != 0)
+	{
+		ft_putstr("Error\n");
+		exit(1);
 	}
 	index_stack(&stack_a);
 	sort_stack(&stack_a, &stack_b);
