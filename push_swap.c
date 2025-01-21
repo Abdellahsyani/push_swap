@@ -59,8 +59,8 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 	int     chunk_size;
 	int     num_chunks;
 	int     i;
-	int     min_index;
-	int     max_index;
+	int     min_range;
+	int     max_range;
 
 	size = count_elements(*stack_a);
 	if (size <= 100)
@@ -73,24 +73,24 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 	i = 0;
 	while (i < num_chunks)
 	{
-		min_index = i * chunk_size;
-		max_index = min_index + chunk_size;
-		if (max_index > size)
-			max_index = size;
+		min_range = i * chunk_size;
+		max_range = min_range + chunk_size;
+		if (max_range > size)
+			max_range = size;
 		int remaining = 0;
 		t_list *temp = *stack_a;
 		while (temp)
 		{
-			if (temp->index >= min_index && temp->index < max_index)
+			if (temp->index >= min_range && temp->index < max_range)
 				remaining++;
 			temp = temp->next;
 		}
 		while (remaining > 0)
 		{
-			if ((*stack_a)->index >= min_index && (*stack_a)->index < max_index)
+			if ((*stack_a)->index >= min_range && (*stack_a)->index < max_range)
 			{
 				pb(stack_a, stack_b);
-				if ((*stack_b)->index < (min_index + max_index) / 2)
+				if ((*stack_b)->index < (min_range + max_range) / 2)
 					rb(stack_b);
 				remaining--;
 			}
@@ -148,7 +148,7 @@ int	clean_stack(char *av)
 	int	i;
 
 	i = 0;
-	while (av[i] == ' ')
+	while (av[i] == ' ' || av[i] == '\t')
 		i++;
 	while (av[i])
 	{
@@ -163,15 +163,39 @@ int	clean_stack(char *av)
 	return (0);
 }
 
+int	check_dup(char *av)
+{
+	int	i;
+	int	dup_num;
+
+	dup_num = 0;
+	// 4 5 8 7 9 2 5 4 1 2 5 4 1 2 45
+	while (av[dup_num])
+	{
+		i = dup_num + 1;
+		while (av[i])
+		{
+			if (av[i] == av[dup_num])
+			{
+				return (1);
+			}
+			i++;
+		}
+		dup_num++;
+	}
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	t_list *stack_a = NULL;
 	t_list *stack_b = NULL;
 	int	i;
 	char **dup;
-
+	
 	if (ac > 1)
 	{
+		i = 0;
 		while (av[i])
 		{
 			clean_stack(av[i]);
