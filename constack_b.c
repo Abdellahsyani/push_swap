@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+/**
+ * rb _ function to rotate stack_b in reverse
+ * @stack_b: the stack that will rotated
+ *
+ */
 void	rrb(t_list **stack_b)
 {
 	if (!*stack_b || !(*stack_b)->next)
@@ -30,6 +35,12 @@ void	rrb(t_list **stack_b)
 	*stack_b = last;
 	ft_putstr("rrb\n");
 }
+
+/**
+ * rb _ function to rotate stack_b
+ * @stack_b: the stack that will rotated
+ *
+ */
 void	rb(t_list **stack_b)
 {
 	if (!*stack_b || !(*stack_b)->next)
@@ -47,6 +58,7 @@ void	rb(t_list **stack_b)
 	first->next = NULL;
 	ft_putstr("rb\n");
 }
+
 /**
  * sb _ function to swap stack b
  * @stack_b: stack to be swaped
@@ -138,4 +150,4 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (res * sign);
-}
+ }

@@ -230,6 +230,7 @@ int main(int ac, char **av)
 			add_to_stack(&stack_a, num);
 			j++;
 		}
+		free(dup);
 		i++;
 	}
 	if (check_dup(stack_a) != 0)
@@ -247,6 +248,7 @@ int main(int ac, char **av)
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
+	free(dup);
 
 	return 0;
 }
