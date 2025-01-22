@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+/**
+ * find_min _ function to find the mini value in stack
+ * @stack_a: stack to scane for small value
+ *
+ * return: min value node
+ */
 t_list	*find_min(t_list **stack_a)
 {
 	t_list *temp = *stack_a;
@@ -28,7 +34,10 @@ t_list	*find_min(t_list **stack_a)
 	return (min_node);
 }
 
-
+/**
+ * index_stack _ indexing stack to sort it easily
+ * @stack_a: the stack that will be sorted
+ */
 void	index_stack(t_list **stack_a)
 {
 	int	index = 0;
@@ -41,6 +50,12 @@ void	index_stack(t_list **stack_a)
 	}
 }
 
+/**
+ * count_elements _ count how many node we have in stack
+ * stack: stack to be counted
+ *
+ * return: number of element that we find
+ */
 int	count_elements(t_list *stack)
 {
 	int	count;
@@ -248,7 +263,6 @@ int main(int ac, char **av)
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
-	free(dup);
 
 	return 0;
 }
