@@ -18,10 +18,10 @@
 # include <unistd.h>
 
 typedef struct n_list {
-	struct n_list *next;
-	struct n_list *prev;
-	int data;
-	int index;
+	struct	n_list *next;
+	struct	n_list *prev;
+	int	data;
+	int	index;
 } t_list;
 
 /*helper functions to sort stack*/
@@ -32,6 +32,7 @@ int	ft_atoi(char *str);
 void	ft_putstr(char *str);
 char	**ft_split(char const *s, char c);
 void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_size);
+int	count_nodes(t_list *stack);
 
 
 /*rotate swap push */

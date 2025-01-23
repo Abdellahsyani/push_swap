@@ -42,14 +42,15 @@ void	sa(t_list **stack_a)
  */
 void	ra(t_list **stack_a)
 {
+	t_list	*first;
+	t_list	*last;
+
 	if (!*stack_a || !(*stack_a)->next)
 		return ;
-	t_list *first = *stack_a;
-	t_list *last = *stack_a;
-
+	last = *stack_a;
+	first = *stack_a;
 	while (last->next)
 		last = last->next;
-
 	*stack_a = first->next;
 	(*stack_a)->prev = NULL;
 	last->next = first;
@@ -64,14 +65,14 @@ void	ra(t_list **stack_a)
  */
 void	rra(t_list **stack_a)
 {
+	t_list	*last;
+	t_list	*prev_last;
+
 	if (!*stack_a || !(*stack_a)->next)
 		return ;
-	t_list *last = *stack_a;
-	t_list *prev_last;
-
+	last = *stack_a;
 	while (last->next)
 		last = last->next;
-
 	prev_last = last->prev;
 	prev_last->next = NULL;
 	last->next = *stack_a;
@@ -88,14 +89,14 @@ void	rra(t_list **stack_a)
  */
 void pa(t_list **stack_a, t_list **stack_b)
 {
+	t_list	*first_b;
+
 	if (!*stack_b)
 		return ;
-	t_list *first_b = *stack_b;
-
+	first_b = *stack_b;
 	*stack_b = first_b->next;
 	if (*stack_b)
 		(*stack_b)->prev = NULL;
-
 	first_b->next = *stack_a;
 	if (*stack_a)
 		(*stack_a)->prev = first_b;

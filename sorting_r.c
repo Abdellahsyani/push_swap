@@ -50,7 +50,7 @@ void	sort_three(t_list **stack)
 void	sort_two(t_list **stack_a)
 {
 	if (!*stack_a || !(*stack_a)->next)
-		return;
+		return ;
 	if ((*stack_a)->data > (*stack_a)->next->data)
 		sa(stack_a);
 }

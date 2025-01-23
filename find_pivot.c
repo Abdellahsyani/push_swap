@@ -18,13 +18,15 @@
  *
  * return: how many nodes
  */
-int count_nodes(t_list *stack)
+int	count_nodes(t_list *stack)
 {
-	int count = 0;
+	int	count;
+
+	count = 0;
 	while (stack)
 	{
 		count++;
 		stack = stack->next;
 	}
-	return count;
+	return (count);
 }
