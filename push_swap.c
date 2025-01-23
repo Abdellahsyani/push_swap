@@ -68,38 +68,32 @@ int	count_elements(t_list *stack)
 	return (count);
 }
 
-void	to_stack_b(t_list **stack_a, t_list **stack_b)
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_size)
 {
-	int     size;
-	int     chunk_size;
-	int     num_chunks;
-	int     i;
-	int     min_range;
-	int     max_range;
+	int	remaining;
+	t_list	*temp;
+	int	min_range;
+	int	max_range;
+	int	i;
+	int	size;
 
+	i = 0; 
 	size = count_elements(*stack_a);
-	if (size <= 100)
-		chunk_size = size / 5;
-	else
-		chunk_size = size / 9;
-	if (chunk_size < 10)
-		chunk_size = 10;
-	num_chunks = (size + chunk_size - 1) / chunk_size;
-	i = 0;
 	while (i < num_chunks)
 	{
 		min_range = i * chunk_size;
 		max_range = min_range + chunk_size;
 		if (max_range > size)
 			max_range = size;
-		int remaining = 0;
-		t_list *temp = *stack_a;
+		remaining = 0;
+		temp = *stack_a;
 		while (temp)
 		{
 			if (temp->index >= min_range && temp->index < max_range)
 				remaining++;
 			temp = temp->next;
 		}
+
 		while (remaining > 0)
 		{
 			if ((*stack_a)->index >= min_range && (*stack_a)->index < max_range)
@@ -116,42 +110,61 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 	}
 }
 
+void	to_stack_b(t_list **stack_a, t_list **stack_b)
+{
+	int     size;
+	int     chunk_size;
+	int     num_chunks;
+
+	size = count_elements(*stack_a);
+	if (size <= 100)
+		chunk_size = size / 5;
+	else
+		chunk_size = size / 9;
+	if (chunk_size < 10)
+		chunk_size = 10;
+	num_chunks = (size + chunk_size - 1) / chunk_size;
+	fill_stack_b(stack_a, stack_b, num_chunks, chunk_size);
+}
+
+int	find_max(t_list **stack_b)
+{
+	t_list *temp = *stack_b;
+	int max = -1;
+	int max_pos = 0;
+	int curr_pos = 0;
+	while (temp)
+	{
+		if (temp->index > max)
+		{
+			max = temp->index;
+			max_pos = curr_pos;
+		}
+		curr_pos++;
+		temp = temp->next;
+	}
+	return (max_pos);
+}
+
 void    sort_stack(t_list **stack_a, t_list **stack_b)
 {
 	int     size;
+	int	max_pos;
+
 	to_stack_b(stack_a, stack_b);
 	size = count_elements(*stack_b);
 	while (size > 0)
 	{
-		t_list *temp = *stack_b;
-		int max = -1;
-		int max_pos = 0;
-		int curr_pos = 0;
-		while (temp)
-		{
-			if (temp->index > max)
-			{
-				max = temp->index;
-				max_pos = curr_pos;
-			}
-			curr_pos++;
-			temp = temp->next;
-		}
+		max_pos = find_max(stack_b);
 		if (max_pos <= size / 2)
 		{
-			while (max_pos > 0)
-			{
+			while (max_pos-- > 0)
 				rb(stack_b);
-				max_pos--;
-			}
 		}
 		else
-	{
-			while (max_pos < size)
-			{
+		{
+			while (max_pos++ < size)
 				rrb(stack_b);
-				max_pos++;
-			}
 		}
 		pa(stack_a, stack_b);
 		size--;
@@ -186,7 +199,7 @@ int	clean_stack(char *av)
 			i++;
 		}
 		else
-			return (1);
+		return (1);
 	}
 	return (0);
 }

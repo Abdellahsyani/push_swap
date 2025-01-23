@@ -31,6 +31,7 @@ void	index_stack(t_list **stack_a);
 int	ft_atoi(char *str);
 void	ft_putstr(char *str);
 char	**ft_split(char const *s, char c);
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_size);
 
 
 /*rotate swap push */
