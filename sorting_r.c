@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+
+/*void	sort_five(t_list **stack)*/
+/*{*/
+/*	t_list	*temp;*/
+/*	int	min;*/
+/**/
+/*	if (!stack)*/
+/*		return ;*/
+/*	while (*stack)*/
+/*	{*/
+/**/
+/*	}*/
+/*}*/
+
 /**
  * sort_three _ the function that sort 3 numbers
  * @stack: the stack that we want to sort
@@ -50,7 +64,7 @@ void	sort_three(t_list **stack)
 void	sort_two(t_list **stack_a)
 {
 	if (!*stack_a || !(*stack_a)->next)
-		return;
+		return ;
 	if ((*stack_a)->data > (*stack_a)->next->data)
 		sa(stack_a);
 }

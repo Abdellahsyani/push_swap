@@ -104,7 +104,7 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_
 				remaining--;
 			}
 			else
-			ra(stack_a);
+				ra(stack_a);
 		}
 		i++;
 	}
@@ -120,7 +120,7 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 	if (size <= 100)
 		chunk_size = size / 5;
 	else
-		chunk_size = size / 9;
+		chunk_size = size / 10;
 	if (chunk_size < 10)
 		chunk_size = 10;
 	num_chunks = (size + chunk_size - 1) / chunk_size;
@@ -186,20 +186,12 @@ int	clean_stack(char *av)
 			if (sign == 1)
 				return (1);
 			sign = 1;
-			i++;
-			continue;
 		}
-		if ((av[i] >= '0' && av[i] <= '9') || av[i] == ' ')
-		{
-			if (av[i] == ' ')
-			{
-				i++;
-				continue;
-			}
-			i++;
-		}
+		else if ((av[i] >= '0' && av[i] <= '9') || av[i] == ' ')
+			sign = 0;
 		else
-		return (1);
+			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -271,7 +263,7 @@ int main(int ac, char **av)
 	t_list *temp = stack_a;
 	while (temp)
 	{
-		printf("%d-->", temp->data);
+		printf("(%d)-->", temp->data);
 		temp = temp->next;
 	}
 	free_stack(&stack_a);
