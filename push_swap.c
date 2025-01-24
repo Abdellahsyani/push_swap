@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+
 /**
  * find_min _ function to find the mini value in stack
  * @stack_a: stack to scane for small value
@@ -75,6 +76,7 @@ int	count_elements(t_list *stack)
 	return (count);
 }
 
+
 void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
 {
 	int	remaining;
@@ -110,7 +112,7 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
 				remaining--;
 			}
 			else
-				ra(stack_a);
+			ra(stack_a);
 		}
 		i++;
 	}
@@ -173,7 +175,7 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 				rb(stack_b);
 		}
 		else
-		{
+	{
 			while (max_pos++ < size)
 				rrb(stack_b);
 		}
@@ -203,10 +205,7 @@ int	clean_stack(char *av)
 			sign = 0;
 		else
 			return (1);
-<<<<<<< HEAD
 		i++;
-=======
->>>>>>> db5b366fdc40c00425dd96eb35e4c351d239cb9f
 	}
 	return (0);
 }
@@ -292,7 +291,7 @@ int main(int ac, char **av)
 		ft_putstr("Error\n");
 		exit(1);
 	}
-	size = count_nodes(stack_a);
+	size = count_elements(stack_a);
 	if (size == 2)
 		sort_two(&stack_a);
 	else if (size == 3)
@@ -303,11 +302,12 @@ int main(int ac, char **av)
 	{
 		index_stack(&stack_a);
 		sort_stack(&stack_a, &stack_b);
+
 	}
 	t_list *temp = stack_a;
 	while (temp)
 	{
-		printf("(%d)-->", temp->data);
+		printf("%d, ", temp->data);
 		temp = temp->next;
 	}
 	free_stack(&stack_a);

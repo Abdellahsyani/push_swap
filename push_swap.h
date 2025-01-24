@@ -24,6 +24,7 @@ typedef struct n_list {
 	int	index;
 } t_list;
 
+
 /*helper functions to sort stack*/
 int	count_elements(t_list *stack);
 t_list	*find_min(t_list **stack_a);
