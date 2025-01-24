@@ -35,9 +35,10 @@ t_list	*create_node(int data)
  * @stack: the stack that we want to fill
  * @data: the data of node
  */
-void add_to_stack(t_list **stack, int data)
+void	add_to_stack(t_list **stack, int data)
 {
-	t_list *new_node;
+	t_list	*new_node;
+	t_list	*temp;
 
 	new_node = create_node(data);
 	if (!new_node)
@@ -45,9 +46,9 @@ void add_to_stack(t_list **stack, int data)
 	if (!*stack)
 	{
 		*stack = new_node;
-		return;
+		return ;
 	}
-	t_list *temp = *stack;
+	temp = *stack;
 	while (temp->next)
 	{
 		temp = temp->next;
@@ -63,6 +64,7 @@ void add_to_stack(t_list **stack, int data)
 void	free_stack(t_list **stack)
 {
 	t_list	*temp;
+
 	while (*stack)
 	{
 		temp = *stack;

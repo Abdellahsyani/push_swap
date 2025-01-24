@@ -19,14 +19,14 @@
  */
 void	rrb(t_list **stack_b)
 {
+	t_list	*last;
+	t_list	*prev_last;
+
 	if (!*stack_b || !(*stack_b)->next)
 		return ;
-	t_list *last = *stack_b;
-	t_list *prev_last;
-
+	last = *stack_b;
 	while (last->next)
 		last = last->next;
-
 	prev_last = last->prev;
 	prev_last->next = NULL;
 	last->next = *stack_b;
@@ -43,11 +43,13 @@ void	rrb(t_list **stack_b)
  */
 void	rb(t_list **stack_b)
 {
+	t_list	*first;
+	t_list	*last;
+
 	if (!*stack_b || !(*stack_b)->next)
 		return ;
-	t_list *first = *stack_b;
-	t_list *last = *stack_b;
-
+	first = *stack_b;
+	last = *stack_b;
 	while (last->next)
 		last = last->next;
 
@@ -70,10 +72,9 @@ void	sb(t_list **stack_b)
 	t_list	*second;
 
 	if (!*stack_b || !(*stack_b)->next)
-		return;
+		return ;
 	first = *stack_b;
 	second = (*stack_b)->next;
-
 	first->next = second->next;
 	if (second->next)
 		second->next->prev = first;
@@ -97,11 +98,9 @@ void	pb(t_list **stack_a, t_list **stack_b)
 	if (!*stack_a)
 		return ;
 	first_a = *stack_a;
-
 	*stack_a = first_a->next;
 	if (*stack_a)
 		(*stack_a)->prev = NULL;
-
 	first_a->next = *stack_b;
 	if (*stack_b)
 		(*stack_b)->prev = first_a;

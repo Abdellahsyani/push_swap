@@ -20,12 +20,15 @@
  */
 t_list	*find_min(t_list **stack_a)
 {
-	t_list *temp = *stack_a;
-	t_list *min_node = NULL;
+	t_list	*temp;
+	t_list	*min_node;
 
+	temp = *stack_a;
+	min_node = NULL;
 	while (temp)
 	{
-		if (temp->index == -1 && (min_node == NULL || temp->data < min_node->data))
+		if (temp->index == -1 && (min_node == NULL
+				|| temp->data < min_node->data))
 		{
 			min_node = temp;
 		}
@@ -40,13 +43,16 @@ t_list	*find_min(t_list **stack_a)
  */
 void	index_stack(t_list **stack_a)
 {
-	int	index = 0;
-	t_list  *node;
+	int		index;
+	t_list	*node;
 
-	while ((node = find_min(stack_a)) != NULL)
+	index = 0;
+	node = find_min(stack_a);
+	while (node)
 	{
 		node->index = index;
 		index++;
+		node = find_min(stack_a);
 	}
 }
 
@@ -61,14 +67,15 @@ int	count_elements(t_list *stack)
 	int	count;
 
 	count = 0;
-	while (stack) {
+	while (stack)
+	{
 		count++;
 		stack = stack->next;
 	}
 	return (count);
 }
 
-void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_size)
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
 {
 	int	remaining;
 	t_list	*temp;
@@ -77,12 +84,12 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_
 	int	i;
 	int	size;
 
-	i = 0; 
+	i = 0;
 	size = count_elements(*stack_a);
-	while (i < num_chunks)
+	while (i < num_c)
 	{
-		min_range = i * chunk_size;
-		max_range = min_range + chunk_size;
+		min_range = i * ch_s;
+		max_range = min_range + ch_s;
 		if (max_range > size)
 			max_range = size;
 		remaining = 0;
@@ -93,7 +100,6 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_
 				remaining++;
 			temp = temp->next;
 		}
-
 		while (remaining > 0)
 		{
 			if ((*stack_a)->index >= min_range && (*stack_a)->index < max_range)
@@ -110,11 +116,11 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_
 	}
 }
 
-void	to_stack_b(t_list **stack_a, t_list **stack_b)
+void	stack_range(t_list **stack_a, t_list **stack_b)
 {
-	int     size;
-	int     chunk_size;
-	int     num_chunks;
+	int	size;
+	int	chunk_size;
+	int	num_chunks;
 
 	size = count_elements(*stack_a);
 	if (size <= 100)
@@ -129,10 +135,15 @@ void	to_stack_b(t_list **stack_a, t_list **stack_b)
 
 int	find_max(t_list **stack_b)
 {
-	t_list *temp = *stack_b;
-	int max = -1;
-	int max_pos = 0;
-	int curr_pos = 0;
+	t_list	*temp;
+	int		max;
+	int		max_pos;
+	int		curr_pos;
+
+	temp = *stack_b;
+	max = -1;
+	max_pos = 0;
+	curr_pos = 0;
 	while (temp)
 	{
 		if (temp->index > max)
@@ -146,12 +157,12 @@ int	find_max(t_list **stack_b)
 	return (max_pos);
 }
 
-void    sort_stack(t_list **stack_a, t_list **stack_b)
+void	sort_stack(t_list **stack_a, t_list **stack_b)
 {
-	int     size;
+	int	size;
 	int	max_pos;
 
-	to_stack_b(stack_a, stack_b);
+	stack_range(stack_a, stack_b);
 	size = count_elements(*stack_b);
 	while (size > 0)
 	{
@@ -174,8 +185,9 @@ void    sort_stack(t_list **stack_a, t_list **stack_b)
 int	clean_stack(char *av)
 {
 	int	i;
-	int	sign = 0;
+	int	sign;
 
+	sign = 0;
 	i = 0;
 	while (av[i] == ' ' || av[i] == '\t')
 		i++;
@@ -191,7 +203,10 @@ int	clean_stack(char *av)
 			sign = 0;
 		else
 			return (1);
+<<<<<<< HEAD
 		i++;
+=======
+>>>>>>> db5b366fdc40c00425dd96eb35e4c351d239cb9f
 	}
 	return (0);
 }
@@ -218,17 +233,10 @@ int	check_dup(t_list *stack_a)
 	return (0);
 }
 
-int main(int ac, char **av)
+void	verify_dup(char **av)
 {
-	t_list *stack_a = NULL;
-	t_list *stack_b = NULL;
 	int	i;
-	char **dup;
 
-	if (ac == 1)
-	{
-		return (0);
-	}
 	i = 1;
 	while (av[i])
 	{
@@ -239,27 +247,63 @@ int main(int ac, char **av)
 		}
 		i++;
 	}
+}
+
+t_list	*verify_stack(t_list *stack_a, int ac, char **av)
+{
+	int	i;
+	char	**dup;
+	int	j;
+	int	num;
+
+	verify_dup(av);
 	i = 1;
 	while (i < ac)
 	{
 		dup = ft_split(av[i], ' ');
-		int j = 0;
+		j = 0;
 		while (dup[j])
 		{
-			int num = ft_atoi(dup[j]);
+			num = ft_atoi(dup[j]);
 			add_to_stack(&stack_a, num);
 			j++;
 		}
 		free(dup);
 		i++;
 	}
+	return (stack_a);
+}
+
+int main(int ac, char **av)
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int	size;
+
+	stack_a = NULL;
+	stack_b = NULL;
+	if (ac == 1)
+	{
+		return (0);
+	}
+	stack_a = verify_stack(stack_a, ac, av);
 	if (check_dup(stack_a) != 0)
 	{
 		ft_putstr("Error\n");
 		exit(1);
 	}
-	index_stack(&stack_a);
-	sort_stack(&stack_a, &stack_b);
+	size = count_nodes(stack_a);
+	if (size == 2)
+		sort_two(&stack_a);
+	else if (size == 3)
+		sort_three(&stack_a);
+	else if (size == 4)
+		sort_four(&stack_a, &stack_b);
+	else
+	{
+		index_stack(&stack_a);
+		sort_stack(&stack_a, &stack_b);
+	}
 	t_list *temp = stack_a;
 	while (temp)
 	{
@@ -268,6 +312,5 @@ int main(int ac, char **av)
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
-
-	return 0;
+	return (0);
 }
