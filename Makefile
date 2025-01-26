@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRC = constack_b.c helper_f.c push_swap.c create_s.c sorting_r.c constack_a.c
+SRC = constack_b.c helper_f.c push_swap.c create_s.c sorting_r.c constack_a.c scan.c tools.c
 
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror

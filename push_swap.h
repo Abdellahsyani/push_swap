@@ -28,19 +28,24 @@ typedef struct n_list {
 /*helper functions to sort stack*/
 int	count_elements(t_list *stack);
 t_list	*find_min(t_list **stack_a);
+int	find_max(t_list **stack_b);
 void	index_stack(t_list **stack_a);
 int	ft_atoi(char *str);
 void	ft_putstr(char *str);
 char	**ft_split(char const *s, char c);
-void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_chunks, int chunk_size);
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s);
 int	count_nodes(t_list *stack);
+int	count_min(t_list **stack_a, int min_range, int max_range);
+void	verify_dup(char **av);
+int	check_dup(t_list *stack_a);
+t_list	*verify_stack(t_list *stack_a, int ac, char **av);
+int	clean_stack(char *av);
 
 
 /*rotate swap push */
 void	rb(t_list **stack_b);
 void	rrb(t_list **stack_b);
 void	sa(t_list **stack_a);
-void	sb(t_list **stack_b);
 void	ra(t_list **stack_a);
 void	rra(t_list **stack_a);
 void	pb(t_list **stack_a, t_list **stack_b);

@@ -58,6 +58,50 @@ void	add_to_stack(t_list **stack, int data)
 }
 
 /**
+ * find_min _ function to find the mini value in stack
+ * @stack_a: stack to scane for small value
+ *
+ * return: min value node
+ */
+t_list	*find_min(t_list **stack_a)
+{
+	t_list	*temp;
+	t_list	*min_node;
+
+	temp = *stack_a;
+	min_node = NULL;
+	while (temp)
+	{
+		if (temp->index == -1 && (min_node == NULL
+				|| temp->data < min_node->data))
+		{
+			min_node = temp;
+		}
+		temp = temp->next;
+	}
+	return (min_node);
+}
+
+/**
+ * index_stack _ indexing stack to sort it easily
+ * @stack_a: the stack that will be sorted
+ */
+void	index_stack(t_list **stack_a)
+{
+	int		index;
+	t_list	*node;
+
+	index = 0;
+	node = find_min(stack_a);
+	while (node)
+	{
+		node->index = index;
+		index++;
+		node = find_min(stack_a);
+	}
+}
+
+/**
  * free_stack _ function to free array
  * @stack: the stack that will freed
  */

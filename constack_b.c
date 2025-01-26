@@ -62,30 +62,6 @@ void	rb(t_list **stack_b)
 }
 
 /**
- * sb _ function to swap stack b
- * @stack_b: stack to be swaped
- *
- */
-void	sb(t_list **stack_b)
-{
-	t_list	*first;
-	t_list	*second;
-
-	if (!*stack_b || !(*stack_b)->next)
-		return ;
-	first = *stack_b;
-	second = (*stack_b)->next;
-	first->next = second->next;
-	if (second->next)
-		second->next->prev = first;
-	second->next = first;
-	first->prev = second;
-	second->prev = NULL;
-	*stack_b = second;
-	ft_putstr("sb\n");
-}
-
-/**
  * pb _ function that push from stack a to stack b
  * @stack_a: the first stack
  * @stack_b: the second stack

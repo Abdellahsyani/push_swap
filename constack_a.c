@@ -104,3 +104,22 @@ void pa(t_list **stack_a, t_list **stack_b)
 	first_b->prev = NULL;
 	ft_putstr("pa\n");
 }
+
+/**
+ * count_elements _ count how many node we have in stack
+ * stack: stack to be counted
+ *
+ * return: number of element that we find
+ */
+int	count_elements(t_list *stack)
+{
+	int	count;
+
+	count = 0;
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
