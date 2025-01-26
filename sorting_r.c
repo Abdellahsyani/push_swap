@@ -101,20 +101,3 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 	sort_three(stack_a);
 	pa(stack_a, stack_b);
 }
-
-/**
- * is_sorted _ checking if the stack are sorted
- * @stack: the stack that we are checking
- * 
- * return: 0 if success 1 if failure
- */
-int	is_sorted(t_list *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->data > stack->next->data)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
