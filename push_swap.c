@@ -12,55 +12,12 @@
 
 #include "push_swap.h"
 
-/*int	count_min(t_list **stack_a, int min_range, int max_range)*/
-/*{*/
-/*	t_list	*temp;*/
-/*	int	remaining;*/
-/**/
-/*	remaining = 0;*/
-/*	temp = *stack_a;*/
-/*	while (temp)*/
-/*	{*/
-/*		if (temp->index >= min_range && temp->index < max_range)*/
-/*			remaining++;*/
-/*		temp = temp->next;*/
-/*	}*/
-/*	return (remaining);*/
-/*}*/
-/**/
-/*void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)*/
-/*{*/
-/*	int	rem;*/
-/*	int	min_range;*/
-/*	int	max_range;*/
-/*	int	i;*/
-/*	int	size;*/
-/**/
-/*	i = 0;*/
-/*	size = count_elements(*stack_a);*/
-/*	while (i < num_c)*/
-/*	{*/
-/*		min_range = i * ch_s;*/
-/*		max_range = min_range + ch_s;*/
-/*		if (max_range > size)*/
-/*			max_range = size;*/
-/*		rem = count_min(stack_a, min_range, max_range);*/
-/*		while (rem > 0)*/
-/*		{*/
-/*			if ((*stack_a)->index >= min_range && (*stack_a)->index < max_range)*/
-/*			{*/
-/*				pb(stack_a, stack_b);*/
-/*				if ((*stack_b)->index < (min_range + max_range) / 2)*/
-/*					rb(stack_b);*/
-/*				rem--;*/
-/*			}*/
-/*			else*/
-/*				ra(stack_a);*/
-/*		}*/
-/*		i++;*/
-/*	}*/
-/*}*/
-
+/**
+ * stack_range _ the fucntion that divied stack into chuncks and fill stack b
+ * @stack_a: the main stack that will be sorted
+ * @stack_b: the second stack that will be used to sort first
+ *
+ */
 void	stack_range(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
@@ -78,30 +35,12 @@ void	stack_range(t_list **stack_a, t_list **stack_b)
 	fill_stack_b(stack_a, stack_b, num_chunks, chunk_size);
 }
 
-/*int	find_max(t_list **stack_b)*/
-/*{*/
-/*	t_list	*temp;*/
-/*	int		max;*/
-/*	int		max_pos;*/
-/*	int		curr_pos;*/
-/**/
-/*	temp = *stack_b;*/
-/*	max = -1;*/
-/*	max_pos = 0;*/
-/*	curr_pos = 0;*/
-/*	while (temp)*/
-/*	{*/
-/*		if (temp->index > max)*/
-/*		{*/
-/*			max = temp->index;*/
-/*			max_pos = curr_pos;*/
-/*		}*/
-/*		curr_pos++;*/
-/*		temp = temp->next;*/
-/*	}*/
-/*	return (max_pos);*/
-/*}*/
-
+/**
+ * sort_stack _ fucntion to sort stack_a take the big elem and push it to a
+ * @stack_a: empty stack to sort all element on it
+ * @stack_b: mixed stack and will be sorted to stack_a
+ *
+ */
 void	sort_stack(t_list **stack_a, t_list **stack_b)
 {
 	int	size;

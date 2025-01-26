@@ -12,7 +12,12 @@
 
 #include "push_swap.h"
 
-
+/**
+ * find_max _ the function to find the maximume value in stack_b
+ * @stack_b: the stack where we look for max value
+ *
+ * return: the max value
+ */
 int	find_max(t_list **stack_b)
 {
 	t_list	*temp;
@@ -37,6 +42,14 @@ int	find_max(t_list **stack_b)
 	return (max_pos);
 }
 
+/**
+ * count_min _ fucntion to find the end of chunk to help in sort chunck
+ * @stack_a: the chunks stack
+ * @min_range: teh begining of the range
+ * @max_range: the max of the range
+ *
+ * return: the length of the chunck that will be sorted
+ */
 int	count_min(t_list **stack_a, int min_range, int max_range)
 {
 	t_list	*temp;

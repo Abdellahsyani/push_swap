@@ -57,6 +57,8 @@ int	check_dup(t_list *stack_a)
 
 	while (stack_a)
 	{
+		if (stack_a->data > MAX_INT || stack_a < MIN_INT)
+			return (1);
 		dup_num = stack_a->data;
 		temp = stack_a->next;
 		while (temp)

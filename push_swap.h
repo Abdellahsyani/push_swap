@@ -24,6 +24,8 @@ typedef struct n_list {
 	int	index;
 } t_list;
 
+#define MAX_INT 2147483647
+#define MIN_INT -2147483648
 
 /*helper functions to sort stack*/
 int	count_elements(t_list *stack);
