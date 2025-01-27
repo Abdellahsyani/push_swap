@@ -53,7 +53,7 @@ int	find_max(t_list **stack_b)
 int	count_min(t_list **stack_a, int min_range, int max_range)
 {
 	t_list	*temp;
-	int	remaining;
+	int		remaining;
 
 	remaining = 0;
 	temp = *stack_a;
@@ -96,5 +96,21 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
 				ra(stack_a);
 		}
 		i++;
+	}
+}
+
+/**
+ * max_min _ fucntion to check MAX_INT and MAX_MIN
+ * @num: the number that will be checked
+ * @dup: just for free the memory
+ *
+ */
+void	max_min(long num, char **dup)
+{
+	if (num > INT_MAX || num < INT_MIN)
+	{
+		ft_putstr("Error\n");
+		free_split_result(dup);
+		exit(1);
 	}
 }

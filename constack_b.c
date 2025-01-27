@@ -52,7 +52,6 @@ void	rb(t_list **stack_b)
 	last = *stack_b;
 	while (last->next)
 		last = last->next;
-
 	*stack_b = first->next;
 	(*stack_b)->prev = NULL;
 	last->next = first;
@@ -68,7 +67,7 @@ void	rb(t_list **stack_b)
  *
  */
 void	pb(t_list **stack_a, t_list **stack_b)
-{	
+{
 	t_list	*first_a;
 
 	if (!*stack_a)
@@ -102,11 +101,11 @@ void	ft_putstr(char *str)
  *
  * return: string converted to number
  */
-int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
 	int	i;
 	int	sign;
-	int	res;
+	long long	res;
 
 	i = 0;
 	sign = 1;
@@ -124,5 +123,7 @@ int	ft_atoi(char *str)
 		res = res * 10 + (str[i] - '0');
 		i++;
 	}
-	return (res * sign);
+	res *= sign;
+	return ((long)res);
  }
+

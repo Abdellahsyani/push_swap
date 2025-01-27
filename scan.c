@@ -81,7 +81,7 @@ int	check_dup(t_list *stack_a)
 		temp = stack_a->next;
 		while (temp)
 		{
-			if (temp->data == dup_num || dup_num > INT_MAX)
+			if (temp->data == dup_num)
 			{
 				return (1);
 			}
@@ -126,7 +126,7 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 	int	i;
 	char	**dup;
 	int	j;
-	int	num;
+	long	num;
 
 	verify_dup(av);
 	i = 1;
@@ -137,7 +137,8 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 		while (dup[j])
 		{
 			num = ft_atoi(dup[j]);
-			add_to_stack(&stack_a, num);
+			max_min(num, dup);
+			add_to_stack(&stack_a, (int)num);
 			j++;
 		}
 		free_split_result(dup);
