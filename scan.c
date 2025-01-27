@@ -13,6 +13,26 @@
 #include "push_swap.h"
 
 /**
+ * free_split_result _ fucntion to free the garbage of split
+ * @split_result: the array that will be freed
+ *
+ */
+void	free_split_result(char **split_result)
+{
+	int	i;
+
+	i = 0;
+	if (!split_result)
+		return ;
+	while (split_result[i])
+	{
+		free(split_result[i]);
+		i++;
+	}
+	free(split_result);
+}
+
+/**
  * clean_stack _ function to check the stack: charcter - + ...
  * @av: the stack that we want to check
  *
@@ -57,13 +77,11 @@ int	check_dup(t_list *stack_a)
 
 	while (stack_a)
 	{
-		if (stack_a->data > MAX_INT || stack_a < MIN_INT)
-			return (1);
 		dup_num = stack_a->data;
 		temp = stack_a->next;
 		while (temp)
 		{
-			if (temp->data == dup_num)
+			if (temp->data == dup_num || dup_num > INT_MAX)
 			{
 				return (1);
 			}
@@ -122,7 +140,7 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 			add_to_stack(&stack_a, num);
 			j++;
 		}
-		free(dup);
+		free_split_result(dup);
 		i++;
 	}
 	return (stack_a);

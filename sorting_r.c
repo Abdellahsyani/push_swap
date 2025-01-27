@@ -13,19 +13,57 @@
 #include "push_swap.h"
 
 
-/*void	sort_five(t_list **stack)*/
-/*{*/
-/*	t_list	*temp;*/
-/*	int	min;*/
-/**/
-/*	if (!stack)*/
-/*		return ;*/
-/*	while (*stack)*/
-/*	{*/
-/**/
-/*	}*/
-/*}*/
+static	int	get_min(t_list **stack)
+{
+	t_list	*temp;
+	int	min;
+	int	cur_pos;
+	int	pos;
 
+	temp = *stack;
+	min = temp->data;
+	cur_pos = 0;
+	pos = 0;
+	while (temp)
+	{
+		if (temp->data < min)
+		{
+			min = temp->data;
+			cur_pos = pos;
+		}
+		pos++;
+		temp = temp->next;
+	}
+	return (cur_pos);
+}
+
+void    sort_five(t_list **stack_a, t_list **stack_b)
+{
+	int	cur_pos;
+	int	i;
+
+	i = 0;
+	cur_pos = 0;
+	while (i < 2)
+	{
+		cur_pos = get_min(stack_a);
+		if (cur_pos <= 5/2)
+		{
+			while (cur_pos-- > 0)
+				ra(stack_a);
+		}
+		else
+		{
+			while (cur_pos++ < 5)
+				rra(stack_a);
+		}
+		pb(stack_a, stack_b);
+		i++;
+	}
+	sort_three(stack_a);
+	pa(stack_a, stack_b);
+	pa(stack_a, stack_b);
+}
 /**
  * sort_three _ the function that sort 3 numbers
  * @stack: the stack that we want to sort
@@ -43,16 +81,16 @@ void	sort_three(t_list **stack)
 		sa(stack);
 	else if (first > second && second > third)
 	{
-		sa(stack);
-		rra(stack);
-	}
+	sa(stack);
+	rra(stack);
+}
 	else if (first > second && second < third && first > third)
 		ra(stack);
 	else if (first < second && second > third && first < third)
 	{
-		sa(stack);
-		ra(stack);
-	}
+	sa(stack);
+	ra(stack);
+}
 	else if (first < second && second > third && first > third)
 		rra(stack);
 }
@@ -76,25 +114,9 @@ void	sort_two(t_list **stack_a)
  */
 void	sort_four(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*temp;
-	int	min;
 	int	min_pos;
-	int	pos;
 
-	temp = *stack_a;
-	min = temp->data;
-	min_pos = 0;
-	pos = 0;
-	while (temp)
-	{
-		if (temp->data < min)
-		{
-			min = temp->data;
-			min_pos = pos;
-		}
-		pos++;
-		temp = temp->next;
-	}
+	min_pos = get_min(stack_a);
 	while (min_pos-- > 0)
 		ra(stack_a);
 	pb(stack_a, stack_b);

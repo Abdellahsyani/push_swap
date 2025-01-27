@@ -78,9 +78,12 @@ static char	*ft_fillstr(const char *s, int len)
  */
 static	void	*ft_free(char **dups, int i)
 {
+	if (!dups)
+		return (NULL);
 	while (i > 0)
 	{
-		free(dups[i - 1]);
+		if (dups[i - 1])
+			free(dups[i - 1]);
 		i--;
 	}
 	free(dups);
@@ -111,12 +114,9 @@ static char	**super_split(char **dups, char const *s, char c, int strings_s)
 		start = j;
 		while (s[j] != c && s[j] != '\0')
 			j++;
-		if (j > start)
-		{
-			dups[i] = ft_fillstr(s + start, j - start);
-			if (dups[i] == NULL)
-				return (ft_free(dups, i));
-		}
+		dups[i] = ft_fillstr(s + start, j - start);
+		if (dups[i] == NULL)
+			return (ft_free(dups, i));
 		i++;
 	}
 	dups[i] = NULL;

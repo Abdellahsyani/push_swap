@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct n_list {
 	struct	n_list *next;
@@ -27,6 +28,7 @@ typedef struct n_list {
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
 
+void free_split_result(char **split_result);
 /*helper functions to sort stack*/
 int	count_elements(t_list *stack);
 t_list	*find_min(t_list **stack_a);
@@ -58,6 +60,7 @@ void	sort_three(t_list **stack);
 void	sort_two(t_list **stack_a);
 void	sort_four(t_list **stack_a, t_list **stack_b);
 void	sort_stack(t_list **stack_a, t_list **stack_b);
+void	sort_five(t_list **stack_a, t_list **stack_b);
 
 /*create stack and free it*/
 t_list	*create_node(int data);

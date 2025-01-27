@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <string.h>
 
 int	clean_stack(char *av)
 {
@@ -37,7 +39,7 @@ int	clean_stack(char *av)
 	return (0);
 }
 
-void	verify(int ac, char **av)
+void	verify(char **av)
 {
 	int	i;
 
@@ -46,12 +48,12 @@ void	verify(int ac, char **av)
 	{
 		if (clean_stack(av[i]) != 0)
 		{
-			ft_putstr("KO\n");
+			putstr("KO\n");
 			exit(1);
 		}
 		else
 		{
-			ft_putstr("OK\n");
+			putstr("OK\n");
 			exit(0);
 		}
 		i++;
@@ -63,6 +65,8 @@ int	main(int ac, char **av)
 	char	**dup;
 	int	i;
 	char	*arr[1024];
+	int	j;
+	int	num;
 
 	verify(av);
 	i = 1;
@@ -72,12 +76,12 @@ int	main(int ac, char **av)
 		j = 0;
 		while (dup[j])
 		{
-			num = ft_atoi(dup[j]);
+			num = atoi(dup[j]);
 			arr[j] = num;
 			j++;
 		}
 		i++;
 	}
-	check_dup(arr);
+	//check_dup(arr);
 	return (0);
 }

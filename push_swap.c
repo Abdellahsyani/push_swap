@@ -91,18 +91,20 @@ int main(int ac, char **av)
 		sort_three(&stack_a);
 	else if (size == 4)
 		sort_four(&stack_a, &stack_b);
+	else if (size == 5)
+		sort_five(&stack_a, &stack_b);
 	else
 	{
 		index_stack(&stack_a);
 		sort_stack(&stack_a, &stack_b);
 
 	}
-	t_list *temp = stack_a;
-	while (temp)
-	{
-		printf("%d, ", temp->data);
-		temp = temp->next;
-	}
+	/*t_list *temp = stack_a;*/
+	/*while (temp)*/
+	/*{*/
+	/*	printf("%d, ", temp->data);*/
+	/*	temp = temp->next;*/
+	/*}*/
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
