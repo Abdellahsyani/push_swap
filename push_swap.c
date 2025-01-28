@@ -57,7 +57,7 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 				rb(stack_b);
 		}
 		else
-	{
+		{
 			while (max_pos++ < size)
 				rrb(stack_b);
 		}
@@ -66,6 +66,11 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 	}
 }
 
+/**
+ * start_sort _ fucntion that sorting start from it begining
+ * @stack_a: stack that will be sorted
+ * @stack_b: the helper stack to sort stack_a
+ */
 void	start_sort(t_list *stack_a, t_list *stack_b)
 {
 	int	size;
@@ -83,12 +88,11 @@ void	start_sort(t_list *stack_a, t_list *stack_b)
 	{
 		index_stack(&stack_a);
 		sort_stack(&stack_a, &stack_b);
-
 	}
 	free_stack(&stack_a);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
