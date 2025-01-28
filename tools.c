@@ -66,9 +66,42 @@ int	count_min(t_list **stack_a, int min_range, int max_range)
 	return (remaining);
 }
 
-void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
+/**
+ * helper_b _ function to help just for norminette
+ * @stack_a: teh first stack
+ * @stack_b: the second stck
+ * @min: the min value in the range
+ * @max: the max value in the range
+ */
+static void	helper_b(t_list **stack_a, t_list **stack_b, int min, int max)
 {
 	int	rem;
+
+	rem = count_min(stack_a, min, max);
+	while (rem > 0)
+	{
+		if ((*stack_a)->index >= min && (*stack_a)->index < max)
+		{
+			pb(stack_a, stack_b);
+			if ((*stack_b)->index < (min + max) / 2)
+				rb(stack_b);
+			rem--;
+		}
+		else
+			ra(stack_a);
+	}
+}
+
+/**
+ * fill_stack_b _the function to fill stack_b by element
+ * @satck_a: the stack that will use to fill stack_b
+ * @stack_b: the stack_b that will be filled
+ * @num_c: the number of chunks that we use to sort the stack
+ * @ch_s: the size of each chunk
+ * => located at push_swap.c
+ */
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
+{
 	int	min_range;
 	int	max_range;
 	int	i;
@@ -82,19 +115,7 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
 		max_range = min_range + ch_s;
 		if (max_range > size)
 			max_range = size;
-		rem = count_min(stack_a, min_range, max_range);
-		while (rem > 0)
-		{
-			if ((*stack_a)->index >= min_range && (*stack_a)->index < max_range)
-			{
-				pb(stack_a, stack_b);
-				if ((*stack_b)->index < (min_range + max_range) / 2)
-					rb(stack_b);
-				rem--;
-			}
-			else
-				ra(stack_a);
-		}
+		helper_b(stack_a, stack_b, min_range, max_range);
 		i++;
 	}
 }
@@ -103,7 +124,7 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c, int ch_s)
  * max_min _ fucntion to check MAX_INT and MAX_MIN
  * @num: the number that will be checked
  * @dup: just for free the memory
- *
+ * => this is located at scan.c
  */
 void	max_min(long num, char **dup)
 {

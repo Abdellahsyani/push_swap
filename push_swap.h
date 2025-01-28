@@ -36,7 +36,7 @@ t_list				*find_min(t_list **stack_a);
 int					find_max(t_list **stack_b);
 void				index_stack(t_list **stack_a);
 long				ft_atoi(char *str);
-void					ft_putstr(char *str);
+void				ft_putstr(char *str);
 char				**ft_split(char const *s, char c);
 void				fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c,
 						int ch_s);

@@ -29,7 +29,6 @@ void	sa(t_list **stack_a)
 	if (second->next)
 		second->next->prev = first;
 	second->next = first;
-
 	first->prev = second;
 	second->prev = NULL;
 	*stack_a = second;
@@ -87,7 +86,7 @@ void	rra(t_list **stack_a)
  * @stack_a: the first stack
  * @stack_b: teh second stack
  */
-void pa(t_list **stack_a, t_list **stack_b)
+void	pa(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*first_b;
 

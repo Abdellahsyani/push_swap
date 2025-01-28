@@ -72,7 +72,7 @@ int	clean_stack(char *av)
  */
 int	check_dup(t_list *stack_a)
 {
-	int	dup_num;
+	int		dup_num;
 	t_list	*temp;
 
 	while (stack_a)
@@ -123,9 +123,9 @@ void	verify_dup(char **av)
  */
 t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 {
-	int	i;
+	int		i;
 	char	**dup;
-	int	j;
+	int		j;
 	long	num;
 
 	verify_dup(av);

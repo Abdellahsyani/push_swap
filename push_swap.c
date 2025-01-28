@@ -66,24 +66,10 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-int main(int ac, char **av)
+void	start_sort(t_list *stack_a, t_list *stack_b)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
 	int	size;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (ac == 1)
-	{
-		return (0);
-	}
-	stack_a = verify_stack(stack_a, ac, av);
-	if (check_dup(stack_a) != 0)
-	{
-		ft_putstr("Error\n");
-		exit(1);
-	}
 	size = count_elements(stack_a);
 	if (size == 2)
 		sort_two(&stack_a);
@@ -99,13 +85,27 @@ int main(int ac, char **av)
 		sort_stack(&stack_a, &stack_b);
 
 	}
-	t_list *temp = stack_a;
-	while (temp)
-	{
-		printf("%d, ", temp->data);
-		temp = temp->next;
-	}
 	free_stack(&stack_a);
-	free_stack(&stack_b);
+}
+
+int main(int ac, char **av)
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+
+	stack_a = NULL;
+	stack_b = NULL;
+	if (ac == 1)
+	{
+		return (0);
+	}
+	stack_a = verify_stack(stack_a, ac, av);
+	if (check_dup(stack_a) != 0)
+	{
+		free(stack_a);
+		ft_putstr("Error\n");
+		exit(1);
+	}
+	start_sort(stack_a, stack_b);
 	return (0);
 }

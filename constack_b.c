@@ -103,8 +103,8 @@ void	ft_putstr(char *str)
  */
 long	ft_atoi(char *str)
 {
-	int	i;
-	int	sign;
+	int			i;
+	int			sign;
 	long long	res;
 
 	i = 0;
@@ -125,5 +125,4 @@ long	ft_atoi(char *str)
 	}
 	res *= sign;
 	return ((long)res);
- }
-
+}
