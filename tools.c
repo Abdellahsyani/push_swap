@@ -50,7 +50,7 @@ int	find_max(t_list **stack_b)
  *
  * return: the length of the chunck that will be sorted
  */
-int	count_min(t_list **stack_a, int min_range, int max_range)
+static int	count_min(t_list **stack_a, int min_range, int max_range)
 {
 	t_list	*temp;
 	int		remaining;
