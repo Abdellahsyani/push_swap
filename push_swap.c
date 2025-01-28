@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	stack_a = verify_stack(stack_a, ac, av);
 	if (check_dup(stack_a) != 0)
 	{
-		free(stack_a);
+		free_stack(&stack_a);
 		ft_putstr("Error\n");
 		exit(1);
 	}

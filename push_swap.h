@@ -41,7 +41,7 @@ char				**ft_split(char const *s, char c);
 void				fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c,
 						int ch_s);
 int					count_nodes(t_list *stack);
-int					count_min(t_list **stack_a, int min_range, int max_range);
+//int					count_min(t_list **stack_a, int min_range, int max_range);
 void				verify_dup(char **av);
 int					check_dup(t_list *stack_a);
 t_list				*verify_stack(t_list *stack_a, int ac, char **av);

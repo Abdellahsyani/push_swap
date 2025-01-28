@@ -10,78 +10,127 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "../push_swap.h"
+#include "get_next_line.h"
 
-int	clean_stack(char *av)
+
+static void	free_all(t_list **stack_a, t_list **stack_b, char *str)
 {
-	int	i;
-	int	sign;
+	free(str);
+	free_stack(stack_a);
+	free_stack(stack_b);
+	ft_putstr("Error\n");
+}
 
-	sign = 0;
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*ss1;
+	unsigned char	*ss2;
+	size_t			i;
+
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
 	i = 0;
-	while (av[i] == ' ' || av[i] == '\t')
-		i++;
-	while (av[i])
+	while (i < n)
 	{
-		if (av[i] == '-' || av[i] == '+')
-		{
-			if (sign == 1)
-				return (1);
-			sign = 1;
-		}
-		else if ((av[i] >= '0' && av[i] <= '9') || av[i] == ' ')
-			sign = 0;
-		else
-			return (1);
+		if (ss1[i] != ss2[i])
+			return (ss1[i] - ss2[i]);
+		if (ss1[i] == '\0' || ss2[i] == '\0')
+			return (ss1[i] - ss2[i]);
 		i++;
 	}
 	return (0);
 }
 
-void	verify(char **av)
+static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
+{
+	if (ft_strncmp(str, "sa\n", 3) == 0)
+		sa(stack_a);
+	else if (ft_strncmp(str, "ra\n", 3) == 0)
+		ra(stack_a);
+	else if (ft_strncmp(str, "rb\n", 3) == 0)
+		rb(stack_b);
+	else if (ft_strncmp(str, "rra\n", 3) == 0)
+		rra(stack_a);
+	else if (ft_strncmp(str, "rrb\n", 3) == 0)
+		rrb(stack_b);
+	else if (ft_strncmp(str, "pa\n", 3) == 0)
+		pa(stack_a, stack_b);
+	else if (ft_strncmp(str, "pb\n", 3) == 0)
+		pb(stack_b, stack_a);
+	else
+		free_all(stack_a, stack_b, str);
+}
+
+static void	read_instraction(t_list *stack_a, t_list *stack_b)
+{
+	char	*line;
+
+	line = get_next_line(0);
+	while (line)
+	{
+		instraction_cmp(line, &stack_a, &stack_b);
+		free(line);
+		line = get_next_line(0);
+	}
+}
+
+static int is_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+static void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
-	i = 1;
-	while (av[i])
+	i = 0;
+	if (!s || fd == -1)
+		return ;
+	while (s[i])
 	{
-		if (clean_stack(av[i]) != 0)
-		{
-			putstr("KO\n");
-			exit(1);
-		}
-		else
-		{
-			putstr("OK\n");
-			exit(0);
-		}
+		write(fd, &s[i], 1);
 		i++;
 	}
 }
 
 int	main(int ac, char **av)
 {
-	char	**dup;
-	int	i;
-	char	*arr[1024];
-	int	j;
-	int	num;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
-	verify(av);
-	i = 1;
-	while (i < ac)
+	stack_a = NULL;
+	stack_b = NULL;
+	if (ac >= 2)
 	{
-		dup = ft_split(av[i], ' ');
-		j = 0;
-		while (dup[j])
+		/*if (!verify_stack(stack_a, ac, av)) {*/
+		/*	ft_putstr_fd("Error in verify_stack\n", 2);*/
+		/*	return (1);*/
+		/*}*/
+		/*if (check_dup(stack_a) != 0) {*/
+		/*	ft_putstr_fd("Error: Duplicates found\n", 2);*/
+		/*	return (1);*/
+		/*}*/
+		stack_a = verify_stack(stack_a, ac, av);
+		if (check_dup(stack_a) != 0)
 		{
-			num = atoi(dup[j]);
-			arr[j] = num;
-			j++;
+			ft_putstr_fd("Error\n", 2);
+			return (1);
 		}
-		i++;
+		read_instraction(stack_a, stack_b);
+		if (is_sorted(stack_a))
+			ft_putstr_fd("OK\n", 1);
+		else
+			ft_putstr_fd("KO\n", 1);
+		free_stack(&stack_a);
+		free_stack(&stack_b);
+		return (0);
 	}
-	//check_dup(arr);
-	return (0);
+	return (1);
 }
