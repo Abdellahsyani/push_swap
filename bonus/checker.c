@@ -14,13 +14,13 @@
 #include "get_next_line.h"
 
 
-static void	free_all(t_list **stack_a, t_list **stack_b, char *str)
-{
-	free(str);
-	free_stack(stack_a);
-	free_stack(stack_b);
-	ft_putstr("Error\n");
-}
+/*static void	free_all(t_list **stack_a, t_list **stack_b, char *str)*/
+/*{*/
+/*	free(str);*/
+/*	free_stack(stack_a);*/
+/*	free_stack(stack_b);*/
+/*	ft_putstr_fd("Error\n", 2);*/
+/*}*/
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -59,7 +59,12 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 	else if (ft_strncmp(str, "pb\n", 3) == 0)
 		pb(stack_b, stack_a);
 	else
-		free_all(stack_a, stack_b, str);
+	{
+		free(str);
+		free_stack(stack_a);
+		free_stack(stack_b);
+		//ft_putstr_fd("Error\n", 2);
+	}
 }
 
 static void	read_instraction(t_list *stack_a, t_list *stack_b)
@@ -109,14 +114,6 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (ac >= 2)
 	{
-		/*if (!verify_stack(stack_a, ac, av)) {*/
-		/*	ft_putstr_fd("Error in verify_stack\n", 2);*/
-		/*	return (1);*/
-		/*}*/
-		/*if (check_dup(stack_a) != 0) {*/
-		/*	ft_putstr_fd("Error: Duplicates found\n", 2);*/
-		/*	return (1);*/
-		/*}*/
 		stack_a = verify_stack(stack_a, ac, av);
 		if (check_dup(stack_a) != 0)
 		{
