@@ -34,7 +34,7 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 	else if (ft_strncmp(str, "pa\n", 3) == 0)
 		pa(stack_a, stack_b, 1);
 	else if (ft_strncmp(str, "pb\n", 3) == 0)
-		pb(stack_b, stack_a, 1);
+		pb(stack_a, stack_b, 1);
 	else
 	{
 		ft_putstr_fd("Error\n", 2);
@@ -50,14 +50,14 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
  * @stack_a: the stack that contains sorted numbers
  * @stack_b: helped stack to sort
  */
-static void	read_instraction(t_list *stack_a, t_list *stack_b)
+static void	read_instraction(t_list **stack_a, t_list **stack_b)
 {
 	char	*line;
 
 	line = get_next_line(0);
 	while (line)
 	{
-		instraction_cmp(line, &stack_a, &stack_b);
+		instraction_cmp(line, stack_a, stack_b);
 		free(line);
 		line = get_next_line(0);
 	}
@@ -69,7 +69,7 @@ static void	read_instraction(t_list *stack_a, t_list *stack_b)
  *
  * return: 0 if sorted 1 if not
  */
-int	is_sorted(t_list *stack)
+static int	is_sorted_s(t_list *stack)
 {
 	while (stack && stack->next)
 	{
@@ -115,8 +115,8 @@ int	main(int ac, char **av)
 			ft_putstr_fd("Error\n", 2);
 			return (1);
 		}
-		read_instraction(stack_a, stack_b);
-		if (is_sorted(stack_a))
+		read_instraction(&stack_a, &stack_b);
+		if (is_sorted_s(stack_a))
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);
