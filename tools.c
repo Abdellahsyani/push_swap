@@ -82,13 +82,13 @@ static void	helper_b(t_list **stack_a, t_list **stack_b, int min, int max)
 	{
 		if ((*stack_a)->index >= min && (*stack_a)->index < max)
 		{
-			pb(stack_a, stack_b);
+			pb(stack_a, stack_b, 0);
 			if ((*stack_b)->index < (min + max) / 2)
-				rb(stack_b);
+				rb(stack_b, 0);
 			rem--;
 		}
 		else
-			ra(stack_a);
+			ra(stack_a, 0);
 	}
 }
 

@@ -17,7 +17,7 @@
  * @stack_b: the stack that will rotated
  *
  */
-void	rrb(t_list **stack_b)
+void	rrb(t_list **stack_b, int write)
 {
 	t_list	*last;
 	t_list	*prev_last;
@@ -33,7 +33,8 @@ void	rrb(t_list **stack_b)
 	last->prev = NULL;
 	(*stack_b)->prev = last;
 	*stack_b = last;
-	ft_putstr("rrb\n");
+	if (write == 0)
+		ft_putstr("rrb\n");
 }
 
 /**
@@ -41,7 +42,7 @@ void	rrb(t_list **stack_b)
  * @stack_b: the stack that will rotated
  *
  */
-void	rb(t_list **stack_b)
+void	rb(t_list **stack_b, int write)
 {
 	t_list	*first;
 	t_list	*last;
@@ -57,7 +58,8 @@ void	rb(t_list **stack_b)
 	last->next = first;
 	first->prev = last;
 	first->next = NULL;
-	ft_putstr("rb\n");
+	if (write == 0)
+		ft_putstr("rb\n");
 }
 
 /**
@@ -66,7 +68,7 @@ void	rb(t_list **stack_b)
  * @stack_b: the second stack
  *
  */
-void	pb(t_list **stack_a, t_list **stack_b)
+void	pb(t_list **stack_a, t_list **stack_b, int write)
 {
 	t_list	*first_a;
 
@@ -81,7 +83,8 @@ void	pb(t_list **stack_a, t_list **stack_b)
 		(*stack_b)->prev = first_a;
 	*stack_b = first_a;
 	first_a->prev = NULL;
-	ft_putstr("pb\n");
+	if (write == 0)
+		ft_putstr("pb\n");
 }
 
 /**

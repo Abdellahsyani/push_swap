@@ -146,3 +146,4 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 	}
 	return (stack_a);
 }
+

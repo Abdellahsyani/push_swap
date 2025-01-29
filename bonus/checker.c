@@ -22,19 +22,19 @@
 static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 {
 	if (ft_strncmp(str, "sa\n", 3) == 0)
-		sa(stack_a);
+		sa(stack_a, 1);
 	else if (ft_strncmp(str, "ra\n", 3) == 0)
-		ra(stack_a);
+		ra(stack_a, 1);
 	else if (ft_strncmp(str, "rb\n", 3) == 0)
-		rb(stack_b);
+		rb(stack_b, 1);
 	else if (ft_strncmp(str, "rra\n", 3) == 0)
-		rra(stack_a);
+		rra(stack_a, 1);
 	else if (ft_strncmp(str, "rrb\n", 3) == 0)
-		rrb(stack_b);
+		rrb(stack_b, 1);
 	else if (ft_strncmp(str, "pa\n", 3) == 0)
-		pa(stack_a, stack_b);
+		pa(stack_a, stack_b, 1);
 	else if (ft_strncmp(str, "pb\n", 3) == 0)
-		pb(stack_b, stack_a);
+		pb(stack_b, stack_a, 1);
 	else
 	{
 		ft_putstr_fd("Error\n", 2);
@@ -55,6 +55,12 @@ static void	read_instraction(t_list *stack_a, t_list *stack_b)
 	char	*line;
 
 	line = get_next_line(0);
+	if (!line)
+	{
+		free_stack(&stack_a);
+		free_stack(&stack_b);
+		exit(1);
+	}
 	while (line)
 	{
 		instraction_cmp(line, &stack_a, &stack_b);
@@ -109,7 +115,7 @@ int	main(int ac, char **av)
 	if (ac >= 2)
 	{
 		stack_a = verify_stack(stack_a, ac, av);
-		if (check_dup(stack_a) != 0)
+		if (!stack_a || check_dup(stack_a) != 0)
 		{
 			free_stack(&stack_a);
 			ft_putstr_fd("Error\n", 2);

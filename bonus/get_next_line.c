@@ -92,7 +92,7 @@ char	*extract_line(char **static_str)
 		line = malloc(((newline_pos - *static_str) + 1) * sizeof(char));
 		ft_strncpy(line, *static_str, (newline_pos - *static_str));
 		temp = ft_strdup(newline_pos);
-		if (*temp == '\0')
+		if (temp && temp[0] == '\0')
 		{
 			free(temp);
 			temp = NULL;

@@ -45,13 +45,13 @@ int					clean_stack(char *av);
 void				free_split_result(char **split_result);
 
 /*rotate swap push */
-void				rb(t_list **stack_b);
-void				rrb(t_list **stack_b);
-void				sa(t_list **stack_a);
-void				ra(t_list **stack_a);
-void				rra(t_list **stack_a);
-void				pb(t_list **stack_a, t_list **stack_b);
-void				pa(t_list **stack_a, t_list **stack_b);
+void				rb(t_list **stack_b, int write);
+void				rrb(t_list **stack_b, int write);
+void				sa(t_list **stack_a, int write);
+void				ra(t_list **stack_a, int write);
+void				rra(t_list **stack_a, int write);
+void				pb(t_list **stack_a, t_list **stack_b, int write);
+void				pa(t_list **stack_a, t_list **stack_b, int write);
 
 /*functions to sort*/
 void				sort_three(t_list **stack);

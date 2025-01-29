@@ -42,7 +42,10 @@ void	add_to_stack(t_list **stack, int data)
 
 	new_node = create_node(data);
 	if (!new_node)
+	{
+		free_stack(stack);
 		return ;
+	}
 	if (!*stack)
 	{
 		*stack = new_node;
@@ -73,7 +76,7 @@ t_list	*find_min(t_list **stack_a)
 	while (temp)
 	{
 		if (temp->index == -1 && (min_node == NULL
-				|| temp->data < min_node->data))
+			|| temp->data < min_node->data))
 		{
 			min_node = temp;
 		}

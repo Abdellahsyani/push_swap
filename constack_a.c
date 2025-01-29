@@ -16,7 +16,7 @@
  * sa _ function to swap stack_a
  * @stack_a: the stack that we swap
  */
-void	sa(t_list **stack_a)
+void	sa(t_list **stack_a, int write)
 {
 	t_list	*first;
 	t_list	*second;
@@ -32,14 +32,15 @@ void	sa(t_list **stack_a)
 	first->prev = second;
 	second->prev = NULL;
 	*stack_a = second;
-	ft_putstr("sa\n");
+	if(write == 0)
+		ft_putstr("sa\n");
 }
 
 /**
  * ra _ the function to rotate up stack_a
  * @stack_a: stack that we are rotate
  */
-void	ra(t_list **stack_a)
+void	ra(t_list **stack_a, int write)
 {
 	t_list	*first;
 	t_list	*last;
@@ -55,14 +56,15 @@ void	ra(t_list **stack_a)
 	last->next = first;
 	first->prev = last;
 	first->next = NULL;
-	ft_putstr("ra\n");
+	if (write == 0)
+		ft_putstr("ra\n");
 }
 
 /**
  * rra _ the function that rotate stacks in reverse
  * @stack_a: teh stack that we reverse
  */
-void	rra(t_list **stack_a)
+void	rra(t_list **stack_a, int write)
 {
 	t_list	*last;
 	t_list	*prev_last;
@@ -78,7 +80,8 @@ void	rra(t_list **stack_a)
 	last->prev = NULL;
 	(*stack_a)->prev = last;
 	*stack_a = last;
-	ft_putstr("rra\n");
+	if (write == 0)
+		ft_putstr("rra\n");
 }
 
 /**
@@ -86,7 +89,7 @@ void	rra(t_list **stack_a)
  * @stack_a: the first stack
  * @stack_b: teh second stack
  */
-void	pa(t_list **stack_a, t_list **stack_b)
+void	pa(t_list **stack_a, t_list **stack_b, int write)
 {
 	t_list	*first_b;
 
@@ -101,7 +104,8 @@ void	pa(t_list **stack_a, t_list **stack_b)
 		(*stack_a)->prev = first_b;
 	*stack_a = first_b;
 	first_b->prev = NULL;
-	ft_putstr("pa\n");
+	if (write == 0)
+		ft_putstr("pa\n");
 }
 
 /**

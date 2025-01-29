@@ -49,19 +49,19 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 		if (cur_pos <= 5 / 2)
 		{
 			while (cur_pos-- > 0)
-				ra(stack_a);
+				ra(stack_a, 0);
 		}
 		else
 		{
 			while (cur_pos++ < 5)
-				rra(stack_a);
+				rra(stack_a, 0);
 		}
-		pb(stack_a, stack_b);
+		pb(stack_a, stack_b, 0);
 		i++;
 	}
 	sort_three(stack_a);
-	pa(stack_a, stack_b);
-	pa(stack_a, stack_b);
+	pa(stack_a, stack_b, 0);
+	pa(stack_a, stack_b, 0);
 }
 
 /**
@@ -78,21 +78,21 @@ void	sort_three(t_list **stack)
 	second = (*stack)->next->data;
 	third = (*stack)->next->next->data;
 	if (first > second && second < third && first < third)
-		sa(stack);
+		sa(stack, 0);
 	else if (first > second && second > third)
 	{
-		sa(stack);
-		rra(stack);
+		sa(stack, 0);
+		rra(stack, 0);
 	}
 	else if (first > second && second < third && first > third)
-		ra(stack);
+		ra(stack, 0);
 	else if (first < second && second > third && first < third)
 	{
-		sa(stack);
-		ra(stack);
+		sa(stack, 0);
+		ra(stack, 0);
 	}
 	else if (first < second && second > third && first > third)
-		rra(stack);
+		rra(stack, 0);
 }
 
 /**
@@ -104,7 +104,7 @@ void	sort_two(t_list **stack_a)
 	if (!*stack_a || !(*stack_a)->next)
 		return ;
 	if ((*stack_a)->data > (*stack_a)->next->data)
-		sa(stack_a);
+		sa(stack_a, 0);
 }
 
 /**
@@ -118,8 +118,8 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 
 	min_pos = get_min(stack_a);
 	while (min_pos-- > 0)
-		ra(stack_a);
-	pb(stack_a, stack_b);
+		ra(stack_a, 0);
+	pb(stack_a, stack_b, 0);
 	sort_three(stack_a);
-	pa(stack_a, stack_b);
+	pa(stack_a, stack_b, 0);
 }

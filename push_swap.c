@@ -54,14 +54,14 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 		if (max_pos <= size / 2)
 		{
 			while (max_pos-- > 0)
-				rb(stack_b);
+				rb(stack_b, 0);
 		}
 		else
 		{
 			while (max_pos++ < size)
-				rrb(stack_b);
+				rrb(stack_b, 0);
 		}
-		pa(stack_a, stack_b);
+		pa(stack_a, stack_b, 0);
 		size--;
 	}
 }
@@ -90,6 +90,7 @@ void	start_sort(t_list *stack_a, t_list *stack_b)
 		sort_stack(&stack_a, &stack_b);
 	}
 	free_stack(&stack_a);
+	free_stack(&stack_b);
 }
 
 int	main(int ac, char **av)
