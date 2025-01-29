@@ -64,6 +64,23 @@ static void	read_instraction(t_list *stack_a, t_list *stack_b)
 }
 
 /**
+ * is_sorted _ check if the stack is sorted or not
+ * @stack: stack to be checked
+ *
+ * return: 0 if sorted 1 if not
+ */
+int	is_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+/**
  * ft_putstr_fd _ function to write string in a file descriptor
  * @s: the string that will be written
  * fd: file descriptor to write on it
@@ -99,7 +116,7 @@ int	main(int ac, char **av)
 			return (1);
 		}
 		read_instraction(stack_a, stack_b);
-		if (!is_sorted(stack_a))
+		if (is_sorted(stack_a))
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);
