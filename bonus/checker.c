@@ -13,35 +13,12 @@
 #include "../push_swap.h"
 #include "get_next_line.h"
 
-
-/*static void	free_all(t_list **stack_a, t_list **stack_b, char *str)*/
-/*{*/
-/*	free(str);*/
-/*	free_stack(stack_a);*/
-/*	free_stack(stack_b);*/
-/*	ft_putstr_fd("Error\n", 2);*/
-/*}*/
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned char	*ss1;
-	unsigned char	*ss2;
-	size_t			i;
-
-	ss1 = (unsigned char *)s1;
-	ss2 = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
-	{
-		if (ss1[i] != ss2[i])
-			return (ss1[i] - ss2[i]);
-		if (ss1[i] == '\0' || ss2[i] == '\0')
-			return (ss1[i] - ss2[i]);
-		i++;
-	}
-	return (0);
-}
-
+/**
+ * instraction_cmp _ the function to compare the instraction with stack
+ * @str: the string that will be compared
+ * @stack_a: the stack_a that will be used to sort
+ * @stack_b: teh stack_b that helped to sort
+ */
 static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 {
 	if (ft_strncmp(str, "sa\n", 3) == 0)
@@ -67,6 +44,11 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 	}
 }
 
+/**
+ * read_instraction _ function to read the instraction from stdin
+ * @stack_a: the stack that contains sorted numbers
+ * @stack_b: helped stack to sort
+ */
 static void	read_instraction(t_list *stack_a, t_list *stack_b)
 {
 	char	*line;
@@ -80,7 +62,13 @@ static void	read_instraction(t_list *stack_a, t_list *stack_b)
 	}
 }
 
-static int is_sorted(t_list *stack)
+/**
+ * is_sorted _ check if the stack is sorted or not
+ * @stack: stack to be checked
+ *
+ * return: 0 if sorted 1 if not
+ */
+static int	is_sorted(t_list *stack)
 {
 	while (stack && stack->next)
 	{
@@ -91,6 +79,11 @@ static int is_sorted(t_list *stack)
 	return (1);
 }
 
+/**
+ * ft_putstr_fd _ function to write string in a file descriptor
+ * @s: the string that will be written
+ * fd: file descriptor to write on it
+ */
 static void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -117,6 +110,7 @@ int	main(int ac, char **av)
 		stack_a = verify_stack(stack_a, ac, av);
 		if (check_dup(stack_a) != 0)
 		{
+			free_stack(&stack_a);
 			ft_putstr_fd("Error\n", 2);
 			return (1);
 		}
