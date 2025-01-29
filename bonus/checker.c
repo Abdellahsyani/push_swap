@@ -37,9 +37,11 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 		pb(stack_b, stack_a);
 	else
 	{
-		free(str);
+		ft_putstr_fd("Error\n", 2);
 		free_stack(stack_a);
 		free_stack(stack_b);
+		free(str);
+		exit(1);
 	}
 }
 
@@ -83,7 +85,7 @@ static int	is_sorted(t_list *stack)
  * @s: the string that will be written
  * fd: file descriptor to write on it
  */
-static void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
