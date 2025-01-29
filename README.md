@@ -3,7 +3,7 @@
 > the project is about creating or implementing an algorithm that can sort a stack in a fewer steps
 by using two stacks and a specific operations like:
 
-* allowed operations:
+## allowed operations:
 - * sa `(swap a)`: Swap the first 2 elements at the top of stack a.
     - Do nothing if there is only one or no elements.
 - * sb `(swap b)`: Swap the first 2 elements at the top of stack b.
@@ -24,11 +24,11 @@ by using two stacks and a specific operations like:
     - The last element becomes the first one.
 - * rrr : rra and rrb at the same time
 
-* V.2 Example
+## V.2 Example
 > To illustrate the effect of some of these instructions, let’s sort a random list of integers.
 In this example, we’ll consider that both stacks grow from the right.
 ----------------------------------------------------------------------------------------------------------
-- Init a and b:
+- `Init a and b:`
 - 2
 - 1
 - 3
@@ -38,7 +38,7 @@ In this example, we’ll consider that both stacks grow from the right.
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec sa:
+- `Exec sa:`
 - 1
 - 2
 - 3
@@ -48,35 +48,35 @@ In this example, we’ll consider that both stacks grow from the right.
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec pb pb pb:
+- `Exec pb pb pb:`
 - 6 3
 - 5 2
 - 8 1
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec ra rb (equiv. to rr):
+- `Exec ra rb (equiv. to rr):`
 - 5 2
 - 8 1
 - 6 3
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec rra rrb (equiv. to rrr):
+- `Exec rra rrb (equiv. to rrr):`
 - 6 3
 - 5 2
 - 8 1
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec sa:
+- `Exec sa:`
 - 5 3
 - 6 2
 - 8 1
 - _ _
 - a b
 ----------------------------------------------------------------------------------------------------------
-- Exec pa pa pa:
+- `Exec pa pa pa:`
 - 1
 - 2
 - 3
