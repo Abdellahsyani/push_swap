@@ -13,6 +13,23 @@
 #include "push_swap.h"
 
 /**
+ * is_sorted _ check if the stack is sorted or not
+ * @stack: stack to be checked
+ *
+ * return: 0 if sorted 1 if not
+ */
+int	is_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+/**
  * stack_range _ the fucntion that divied stack into chuncks and fill stack b
  * @stack_a: the main stack that will be sorted
  * @stack_b: the second stack that will be used to sort first
@@ -111,6 +128,7 @@ int	main(int ac, char **av)
 		ft_putstr("Error\n");
 		exit(1);
 	}
-	start_sort(stack_a, stack_b);
+	if (!is_sorted(stack_a))
+		start_sort(stack_a, stack_b);
 	return (0);
 }

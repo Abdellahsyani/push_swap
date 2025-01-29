@@ -43,6 +43,7 @@ int					check_dup(t_list *stack_a);
 t_list				*verify_stack(t_list *stack_a, int ac, char **av);
 int					clean_stack(char *av);
 void				free_split_result(char **split_result);
+int					is_sorted(t_list *stack);
 
 /*rotate swap push */
 void				rb(t_list **stack_b, int write);

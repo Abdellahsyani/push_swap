@@ -27,9 +27,9 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 		ra(stack_a, 1);
 	else if (ft_strncmp(str, "rb\n", 3) == 0)
 		rb(stack_b, 1);
-	else if (ft_strncmp(str, "rra\n", 3) == 0)
+	else if (ft_strncmp(str, "rra\n", 4) == 0)
 		rra(stack_a, 1);
-	else if (ft_strncmp(str, "rrb\n", 3) == 0)
+	else if (ft_strncmp(str, "rrb\n", 4) == 0)
 		rrb(stack_b, 1);
 	else if (ft_strncmp(str, "pa\n", 3) == 0)
 		pa(stack_a, stack_b, 1);
@@ -55,35 +55,12 @@ static void	read_instraction(t_list *stack_a, t_list *stack_b)
 	char	*line;
 
 	line = get_next_line(0);
-	if (!line)
-	{
-		free_stack(&stack_a);
-		free_stack(&stack_b);
-		exit(1);
-	}
 	while (line)
 	{
 		instraction_cmp(line, &stack_a, &stack_b);
 		free(line);
 		line = get_next_line(0);
 	}
-}
-
-/**
- * is_sorted _ check if the stack is sorted or not
- * @stack: stack to be checked
- *
- * return: 0 if sorted 1 if not
- */
-static int	is_sorted(t_list *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->data > stack->next->data)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
 }
 
 /**
@@ -122,7 +99,7 @@ int	main(int ac, char **av)
 			return (1);
 		}
 		read_instraction(stack_a, stack_b);
-		if (is_sorted(stack_a))
+		if (!is_sorted(stack_a))
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);
