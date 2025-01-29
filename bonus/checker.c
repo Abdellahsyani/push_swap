@@ -40,7 +40,6 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 		free(str);
 		free_stack(stack_a);
 		free_stack(stack_b);
-		//ft_putstr_fd("Error\n", 2);
 	}
 }
 
