@@ -13,6 +13,20 @@
 #include "../push_swap.h"
 #include "get_next_line.h"
 
+void	free_all(char *str, t_list **stack_a, t_list **stack_b)
+{
+	if (ft_strncmp(str, "rrr\n", 4) == 0)
+		rrr(stack_a, stack_b, 1);	
+	else
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(stack_a);
+		free_stack(stack_b);
+		free(str);
+		exit(1);
+	}
+}
+
 /**
  * instraction_cmp _ the function to compare the instraction with stack
  * @str: the string that will be compared
@@ -33,18 +47,16 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 		rra(stack_a, 1);
 	else if (ft_strncmp(str, "rrb\n", 4) == 0)
 		rrb(stack_b, 1);
+	else if (ft_strncmp(str, "rr\n", 3) == 0)
+		rr(stack_a, stack_b, 1);
+	else if (ft_strncmp(str, "ss\n", 3) == 0)
+		ss(stack_a, stack_b, 1);
 	else if (ft_strncmp(str, "pa\n", 3) == 0)
 		pa(stack_a, stack_b, 1);
 	else if (ft_strncmp(str, "pb\n", 3) == 0)
 		pb(stack_a, stack_b, 1);
 	else
-	{
-		ft_putstr_fd("Error\n", 2);
-		free_stack(stack_a);
-		free_stack(stack_b);
-		free(str);
-		exit(1);
-	}
+		free_all(str, stack_a, stack_b);
 }
 
 /**

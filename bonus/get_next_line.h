@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 17:34:24 by asyani            #+#    #+#             */
-/*   Updated: 2024/12/02 15:17:55 by asyani           ###   ########.fr       */
+/*   Updated: 2025/01/30 18:05:43 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stddef.h>
+# include "../push_swap"
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
@@ -32,6 +33,9 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(char *s);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	ft_putstr_fd(char *s, int fd);
+void				ss(t_list **stack_a, t_list **stack_b, int print);
+void				rrr(t_list **stack_a, t_list **stack_b, int print);
+void				rr(t_list **stack_a, t_list **stack_b, int print);
+void				sb(t_list **stack_b, int print);
 
 #endif
