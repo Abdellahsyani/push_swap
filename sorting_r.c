@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+/**
+ * get_min _ function to get the minimume number and return it's position
+ * @stack: the stack that we will pick a small number
+ *
+ * return: the position of the min number
+ */
 static int	get_min(t_list **stack)
 {
 	t_list	*temp;
@@ -36,6 +42,11 @@ static int	get_min(t_list **stack)
 	return (cur_pos);
 }
 
+/**
+ * sort_five _ function to sort five number in a fewer steps
+ * @stack_a: the main stack that contain numbers
+ * @stack_b: the second stack that will helped to sort stack_a
+ */
 void	sort_five(t_list **stack_a, t_list **stack_b)
 {
 	int	cur_pos;
