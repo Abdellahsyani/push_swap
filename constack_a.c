@@ -32,7 +32,7 @@ void	sa(t_list **stack_a, int write)
 	first->prev = second;
 	second->prev = NULL;
 	*stack_a = second;
-	if(write == 0)
+	if (write == 0)
 		ft_putstr("sa\n");
 }
 

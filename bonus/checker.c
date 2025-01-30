@@ -116,7 +116,7 @@ int	main(int ac, char **av)
 			return (1);
 		}
 		read_instraction(&stack_a, &stack_b);
-		if (is_sorted_s(stack_a))
+		if (is_sorted_s(stack_a) && stack_b == NULL)
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);

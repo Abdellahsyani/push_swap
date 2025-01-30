@@ -76,7 +76,7 @@ t_list	*find_min(t_list **stack_a)
 	while (temp)
 	{
 		if (temp->index == -1 && (min_node == NULL
-			|| temp->data < min_node->data))
+				|| temp->data < min_node->data))
 		{
 			min_node = temp;
 		}
