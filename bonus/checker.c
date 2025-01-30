@@ -25,6 +25,8 @@ static void	instraction_cmp(char *str, t_list **stack_a, t_list **stack_b)
 		sa(stack_a, 1);
 	else if (ft_strncmp(str, "ra\n", 3) == 0)
 		ra(stack_a, 1);
+	else if (ft_strncmp(str, "sb\n", 3) == 0)
+		sa(stack_a, 1);
 	else if (ft_strncmp(str, "rb\n", 3) == 0)
 		rb(stack_b, 1);
 	else if (ft_strncmp(str, "rra\n", 4) == 0)
