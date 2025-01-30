@@ -53,6 +53,10 @@ void				ra(t_list **stack_a, int write);
 void				rra(t_list **stack_a, int write);
 void				pb(t_list **stack_a, t_list **stack_b, int write);
 void				pa(t_list **stack_a, t_list **stack_b, int write);
+/*void				ss(t_list **stack_a, t_list **stack_b, int print);*/
+/*void				rrr(t_list **stack_a, t_list **stack_b, int print);*/
+/*void				rr(t_list **stack_a, t_list **stack_b, int print);*/
+/*void				sb(t_list **stack_b, int print);*/
 
 /*functions to sort*/
 void				sort_three(t_list **stack);
