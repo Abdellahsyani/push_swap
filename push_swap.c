@@ -130,5 +130,10 @@ int	main(int ac, char **av)
 	}
 	if (!is_sorted(stack_a))
 		start_sort(stack_a, stack_b);
+	else
+	{
+		free_stack(&stack_a);
+		free_stack(&stack_b);
+	}
 	return (0);
 }

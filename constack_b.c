@@ -130,6 +130,8 @@ long	ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i] - '0');
+		if (res > 2147483648)
+			return (2147483649);
 		i++;
 	}
 	res *= sign;

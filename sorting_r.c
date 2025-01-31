@@ -51,20 +51,21 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 {
 	int	cur_pos;
 	int	i;
+	int	size;
 
 	i = 0;
-	cur_pos = 0;
 	while (i < 2)
 	{
 		cur_pos = get_min(stack_a);
-		if (cur_pos <= 5 / 2)
+		size = count_elements(*stack_a);
+		if (cur_pos <= size / 2)
 		{
 			while (cur_pos-- > 0)
 				ra(stack_a, 0);
 		}
 		else
 		{
-			while (cur_pos++ < 5)
+			while (cur_pos++ < size)
 				rra(stack_a, 0);
 		}
 		pb(stack_a, stack_b, 0);
