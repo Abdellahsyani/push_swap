@@ -51,7 +51,7 @@ int	clean_stack(char *av)
 	{
 		if (av[i] == '-' || av[i] == '+')
 		{
-			if (sign == 1)
+			if (sign == 1 || (i > 0 && is_digit(av[i - 1])))
 				return (1);
 			sign = 1;
 		}

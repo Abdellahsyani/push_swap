@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <ctype.h>
 
 typedef struct n_list
 {
@@ -44,6 +45,8 @@ t_list				*verify_stack(t_list *stack_a, int ac, char **av);
 int					clean_stack(char *av);
 void				free_split_result(char **split_result);
 int					is_sorted(t_list *stack);
+void				ft_putstr_fd(char *s, int fd);
+int					is_digit(char c);
 
 /*rotate swap push */
 void				rb(t_list **stack_b, int write);

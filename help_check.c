@@ -80,20 +80,14 @@ void	sb(t_list **stack_b, int print)
 }
 
 /**
- * ft_putstr_fd _ function to write string in a file descriptor
- * @s: the string that will be written
- * fd: file descriptor to write on it
+ * is_digit _ the function that check if number or not
+ * @c: the character that will be checked
+ *
+ * return: 1 if digit 0 if not
  */
-void	ft_putstr_fd(char *s, int fd)
+int	is_digit(char c)
 {
-	int	i;
-
-	i = 0;
-	if (!s || fd == -1)
-		return ;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

@@ -13,6 +13,25 @@
 #include "get_next_line.h"
 
 /**
+ * ft_putstr_fd _ function to write string in a file descriptor
+ * @s: the string that will be written
+ * fd: file descriptor to write on it
+ */
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s || fd == -1)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
+/**
  * ft_strncmp _ function to compare the two strings
  * @s1: the first string
  * @s2: teh second string
