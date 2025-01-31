@@ -10,29 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "push_swap.h"
 
 
 void    ss(t_list **stack_a, t_list **stack_b, int print)
 {
-    sa(stack_a);
-    sa(stack_b);
+    sa(stack_a, 1);
+    sa(stack_b, 1);
     if (print == 0)
         ft_putstr("ss\n");
 }
 
 void    rrr(t_list **stack_a, t_list **stack_b, int print)
 {
-    rra(stack_a);
-    rrb(stack_b);
+    rra(stack_a, 1);
+    rrb(stack_b, 1);
     if (print == 0)
         ft_putstr("rrr\n");
 }
 
 void	rr(t_list **stack_a, t_list **stack_b, int print)
 {
-	ra(stack_a);
-	rb(stack_b);
+	ra(stack_a, 1);
+	rb(stack_b, 1);
 	if (print == 0)
 		ft_putstr("rr\n");
 }

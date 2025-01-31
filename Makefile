@@ -1,8 +1,8 @@
 NAME = push_swap
 B_NAME = checker
 
-SRC = constack_b.c helper_f.c push_swap.c create_s.c sorting_r.c constack_a.c scan.c tools.c
-BONUS = bonus/checker.c bonus/get_next_line.c bonus/get_next_line_utils.c bonus/help_check.c
+SRC = constack_b.c helper_f.c push_swap.c create_s.c sorting_r.c constack_a.c scan.c tools.c help_check.c
+BONUS = bonus/checker.c bonus/get_next_line.c bonus/get_next_line_utils.c 
 
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror

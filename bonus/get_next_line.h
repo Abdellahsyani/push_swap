@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stddef.h>
-# include "../push_swap"
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
@@ -33,9 +32,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(char *s);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void				ss(t_list **stack_a, t_list **stack_b, int print);
-void				rrr(t_list **stack_a, t_list **stack_b, int print);
-void				rr(t_list **stack_a, t_list **stack_b, int print);
-void				sb(t_list **stack_b, int print);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
