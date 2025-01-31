@@ -15,6 +15,8 @@
 /**
  * rb _ function to rotate stack_b in reverse
  * @stack_b: the stack that will rotated
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  *
  */
 void	rrb(t_list **stack_b, int write)
@@ -40,6 +42,8 @@ void	rrb(t_list **stack_b, int write)
 /**
  * rb _ function to rotate stack_b
  * @stack_b: the stack that will rotated
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  *
  */
 void	rb(t_list **stack_b, int write)
@@ -66,6 +70,8 @@ void	rb(t_list **stack_b, int write)
  * pb _ function that push from stack a to stack b
  * @stack_a: the first stack
  * @stack_b: the second stack
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  *
  */
 void	pb(t_list **stack_a, t_list **stack_b, int write)

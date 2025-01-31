@@ -15,6 +15,8 @@
 /**
  * sa _ function to swap stack_a
  * @stack_a: the stack that we swap
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  */
 void	sa(t_list **stack_a, int write)
 {
@@ -39,6 +41,8 @@ void	sa(t_list **stack_a, int write)
 /**
  * ra _ the function to rotate up stack_a
  * @stack_a: stack that we are rotate
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  */
 void	ra(t_list **stack_a, int write)
 {
@@ -63,6 +67,8 @@ void	ra(t_list **stack_a, int write)
 /**
  * rra _ the function that rotate stacks in reverse
  * @stack_a: teh stack that we reverse
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  */
 void	rra(t_list **stack_a, int write)
 {
@@ -88,6 +94,8 @@ void	rra(t_list **stack_a, int write)
  * pa _ the function to push from b to a
  * @stack_a: the first stack
  * @stack_b: teh second stack
+ * @write: flag to check if we want to print instraction
+ * 	if write == 0; print if 1 don't print
  */
 void	pa(t_list **stack_a, t_list **stack_b, int write)
 {

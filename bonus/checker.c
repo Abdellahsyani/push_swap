@@ -16,7 +16,7 @@
 void	free_all(char *str, t_list **stack_a, t_list **stack_b)
 {
 	if (ft_strncmp(str, "rrr\n", 4) == 0)
-		rrr(stack_a, stack_b, 1);	
+		rrr(stack_a, stack_b, 1);
 	else
 	{
 		ft_putstr_fd("Error\n", 2);
@@ -92,25 +92,6 @@ static int	is_sorted_s(t_list *stack)
 		stack = stack->next;
 	}
 	return (1);
-}
-
-/**
- * ft_putstr_fd _ function to write string in a file descriptor
- * @s: the string that will be written
- * fd: file descriptor to write on it
- */
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!s || fd == -1)
-		return ;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
 }
 
 int	main(int ac, char **av)
