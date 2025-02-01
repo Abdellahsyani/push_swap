@@ -51,7 +51,8 @@ int	clean_stack(char *av)
 	{
 		if (av[i] == '-' || av[i] == '+')
 		{
-			if (sign == 1 || (i > 0 && is_digit(av[i - 1])))
+			if (sign == 1 || (i > 0 && is_digit(av[i - 1]))
+				|| (!is_digit(av[i + 1])))
 				return (1);
 			sign = 1;
 		}
@@ -135,10 +136,7 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 		dup = ft_split(av[i], ' ');
 		j = 0;
 		if (!dup || !dup[0])
-		{
-			ft_putstr("Error\n");
-			exit(1);
-		}
+			ft_perror();
 		while (dup[j])
 		{
 			num = ft_atoi(dup[j]);

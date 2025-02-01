@@ -47,6 +47,7 @@ void				free_split_result(char **split_result);
 int					is_sorted(t_list *stack);
 void				ft_putstr_fd(char *s, int fd);
 int					is_digit(char c);
+void				ft_perror(void);
 
 /*rotate swap push */
 void				rb(t_list **stack_b, int write);
