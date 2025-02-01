@@ -134,6 +134,11 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 	{
 		dup = ft_split(av[i], ' ');
 		j = 0;
+		if (!dup || !dup[0])
+		{
+			ft_putstr("Error\n");
+			exit(1);
+		}
 		while (dup[j])
 		{
 			num = ft_atoi(dup[j]);

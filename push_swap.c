@@ -118,9 +118,7 @@ int	main(int ac, char **av)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (ac == 1)
-	{
 		return (0);
-	}
 	stack_a = verify_stack(stack_a, ac, av);
 	if (check_dup(stack_a) != 0)
 	{
