@@ -11,8 +11,16 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_perror(void)
+void	ft_perror(char **dup)
 {
 	ft_putstr("Error\n");
+	free_split_result(dup);
+	exit(1);
+}
+
+void	ft_error(char *str)
+{
+	free(str);
+	write(2, "Error\n", 6);
 	exit(1);
 }

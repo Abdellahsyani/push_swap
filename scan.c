@@ -136,11 +136,10 @@ t_list	*verify_stack(t_list *stack_a, int ac, char **av)
 		dup = ft_split(av[i], ' ');
 		j = 0;
 		if (!dup || !dup[0])
-			ft_perror();
+			ft_perror(dup);
 		while (dup[j])
 		{
 			num = ft_atoi(dup[j]);
-			max_min(num, dup);
 			add_to_stack(&stack_a, (int)num);
 			j++;
 		}

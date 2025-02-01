@@ -33,7 +33,7 @@ int					count_elements(t_list *stack);
 t_list				*find_min(t_list **stack_a);
 int					find_max(t_list **stack_b);
 void				index_stack(t_list **stack_a);
-long				ft_atoi(char *str);
+int				ft_atoi(char *str);
 void				ft_putstr(char *str);
 char				**ft_split(char const *s, char c);
 void				fill_stack_b(t_list **stack_a, t_list **stack_b, int num_c,
@@ -47,7 +47,8 @@ void				free_split_result(char **split_result);
 int					is_sorted(t_list *stack);
 void				ft_putstr_fd(char *s, int fd);
 int					is_digit(char c);
-void				ft_perror(void);
+void				ft_perror(char **dup);
+void  ft_error(char *str);
 
 /*rotate swap push */
 void				rb(t_list **stack_b, int write);

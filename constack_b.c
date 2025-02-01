@@ -110,7 +110,7 @@ void	ft_putstr(char *str)
  *
  * return: string converted to number
  */
-long	ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
 	int			i;
 	int			sign;
@@ -130,10 +130,9 @@ long	ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i] - '0');
-		if (res > 2147483648)
-			return (2147483649);
 		i++;
 	}
-	res *= sign;
-	return ((long)res);
+	if ((res * sign) < -2147483648 || (res * sign) > 2147483647)
+		ft_error(str);
+	return ((int)(res * sign));
 }
