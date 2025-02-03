@@ -45,7 +45,7 @@ void	stack_range(t_list **stack_a, t_list **stack_b)
 		chunk_size = size / 6;
 	else
 		chunk_size = size / 14;
-	fill_stack_b(stack_a, stack_b, chunk_size);
+	fill_stack_b(stack_a, stack_b, chunk_size, size);
 }
 
 /**
@@ -78,6 +78,7 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 		size--;
 	}
 }
+
 /**
  * start_sort _ fucntion that sorting start from it begining
  * @stack_a: stack that will be sorted

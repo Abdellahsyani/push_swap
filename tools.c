@@ -43,11 +43,10 @@ int	find_max(t_list **stack_b)
 }
 
 /**
- * helper_b _ function to help just for norminette
- * @stack_a: teh first stack
- * @stack_b: the second stck
- * @min: the min value in the range
- * @max: the max value in the range
+ * update_ranges _ function to help just for norminette
+ * @min_range: the start of range
+ * @max_range: the end of range
+ * @size: the size of stack
  */
 static void	update_ranges(int *min_range, int *max_range, int size)
 {
@@ -61,17 +60,15 @@ static void	update_ranges(int *min_range, int *max_range, int size)
  * fill_stack_b _the function to fill stack_b by element
  * @satck_a: the stack that will use to fill stack_b
  * @stack_b: the stack_b that will be filled
- * @num_c: the number of chunks that we use to sort the stack
- * @ch_s: the size of each chunk
+ * @ch_s: the size of chunk
+ * @size: size of the stack
  * => located at push_swap.c
  */
-void	fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s)
+void	fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s, int size)
 {
 	int	min_range;
 	int	max_range;
-	int	size;
 
-	size = count_elements(*stack_a);
 	max_range = ch_s;
 	min_range = 0;
 	while (*stack_a)
@@ -83,10 +80,11 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s)
 			update_ranges(&min_range, &max_range, size);
 		}
 		else if ((*stack_a)->index >= min_range
-				&& (*stack_a)->index <= max_range)
+			&& (*stack_a)->index <= max_range)
 		{
 			pb(stack_a, stack_b, 0);
-			if (*stack_b && (*stack_b)->next && ((*stack_b)->index < (*stack_b)->next->index))
+			if (*stack_b && (*stack_b)->next
+				&& ((*stack_b)->index < (*stack_b)->next->index))
 				sb(stack_b, 0);
 			update_ranges(&min_range, &max_range, size);
 		}

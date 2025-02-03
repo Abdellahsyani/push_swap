@@ -39,7 +39,8 @@ void				index_stack(t_list **stack_a);
 int				ft_atoi(char *str, char **dup, t_list **stack_a);
 void				ft_putstr(char *str);
 char				**ft_split(char const *s, char c);
-void				fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s);
+void				fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s,
+		     							int size);
 int					count_nodes(t_list *stack);
 void				verify_dup(char **av);
 int					check_dup(t_list *stack_a);
