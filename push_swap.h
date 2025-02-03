@@ -24,6 +24,12 @@ typedef struct n_list
 	int				index;
 }					t_list;
 
+typedef struct s_range
+{
+	int	min_range;
+	int	max_range;
+}		t_range;
+
 /*helper functions to sort stack*/
 void				max_min(long num, char **dup);
 int					count_elements(t_list *stack);
