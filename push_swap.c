@@ -39,17 +39,13 @@ void	stack_range(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 	int	chunk_size;
-	int	num_chunks;
 
 	size = count_elements(*stack_a);
 	if (size <= 100)
-		chunk_size = size / 5;
+		chunk_size = size / 6;
 	else
-		chunk_size = size / 10;
-	if (chunk_size < 10)
-		chunk_size = 10;
-	num_chunks = (size + chunk_size - 1) / chunk_size;
-	fill_stack_b(stack_a, stack_b, num_chunks, chunk_size);
+		chunk_size = size / 14;
+	fill_stack_b(stack_a, stack_b, chunk_size);
 }
 
 /**
@@ -82,7 +78,6 @@ void	sort_stack(t_list **stack_a, t_list **stack_b)
 		size--;
 	}
 }
-
 /**
  * start_sort _ fucntion that sorting start from it begining
  * @stack_a: stack that will be sorted
