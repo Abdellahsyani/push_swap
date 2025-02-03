@@ -24,23 +24,17 @@ typedef struct n_list
 	int				index;
 }					t_list;
 
-typedef struct s_range
-{
-	int	min_range;
-	int	max_range;
-}		t_range;
-
 /*helper functions to sort stack*/
 void				max_min(long num, char **dup);
 int					count_elements(t_list *stack);
 t_list				*find_min(t_list **stack_a);
 int					find_max(t_list **stack_b);
 void				index_stack(t_list **stack_a);
-int				ft_atoi(char *str, char **dup, t_list **stack_a);
+int					ft_atoi(char *str, char **dup, t_list **stack_a);
 void				ft_putstr(char *str);
 char				**ft_split(char const *s, char c);
 void				fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s,
-		     							int size);
+						int size);
 int					count_nodes(t_list *stack);
 void				verify_dup(char **av);
 int					check_dup(t_list *stack_a);
