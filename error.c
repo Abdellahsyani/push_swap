@@ -11,16 +11,17 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_perror(char **dup)
+void	ft_error(char **dup)
 {
 	ft_putstr("Error\n");
 	free_split_result(dup);
 	exit(1);
 }
 
-void	ft_error(char *str)
+void	ft_perror(char **str, t_list **stack_a)
 {
-	free(str);
-	write(2, "Error\n", 6);
+	free_stack(stack_a);
+	free_split_result(str);
+	ft_putstr("Error\n");
 	exit(1);
 }

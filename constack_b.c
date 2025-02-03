@@ -110,7 +110,7 @@ void	ft_putstr(char *str)
  *
  * return: string converted to number
  */
-int	ft_atoi(char *str)
+int	ft_atoi(char *str, char **dup, t_list **stack_a)
 {
 	int			i;
 	int			sign;
@@ -133,6 +133,6 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	if ((res * sign) < -2147483648 || (res * sign) > 2147483647)
-		ft_error(str);
+		ft_perror(dup, stack_a);
 	return ((int)(res * sign));
 }

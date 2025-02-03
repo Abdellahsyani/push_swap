@@ -13,11 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <limits.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <ctype.h>
 
 typedef struct n_list
 {
@@ -33,7 +30,7 @@ int					count_elements(t_list *stack);
 t_list				*find_min(t_list **stack_a);
 int					find_max(t_list **stack_b);
 void				index_stack(t_list **stack_a);
-int				ft_atoi(char *str);
+int				ft_atoi(char *str, char **dup, t_list **stack_a);
 void				ft_putstr(char *str);
 char				**ft_split(char const *s, char c);
 void				fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s);
@@ -46,10 +43,8 @@ void				free_split_result(char **split_result);
 int					is_sorted(t_list *stack);
 void				ft_putstr_fd(char *s, int fd);
 int					is_digit(char c);
-void				ft_perror(char **dup);
-void  ft_error(char *str);
-int find_closest_in_range(t_list **stack, int min, int max);
-int find_next_max(t_list **stack_b);
+void				ft_perror(char **dup, t_list **stack_a);
+void				ft_error(char **dup);
 
 /*rotate swap push */
 void				rb(t_list **stack_b, int write);

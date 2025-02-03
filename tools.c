@@ -49,18 +49,18 @@ int	find_max(t_list **stack_b)
  * @min: the min value in the range
  * @max: the max value in the range
  */
-/*static void	helper_b(t_list **stack_a, t_list **stack_b, int min, int max)*/
-/*{*/
-/*	int	size;*/
-/**/
-/*	size = count_elements(*stack_a);*/
-/*	pb(stack_a, stack_b, 0);*/
-/*	rb(stack_b, 0);*/
-/*	if (max < size)*/
-/*		max++;*/
-/*	if (min < max)*/
-/*		min++;*/
-/*}*/
+static void	helper_b(t_list **stack_a, t_list **stack_b, int min, int max)
+{
+	int	size;
+
+	size = count_elements(*stack_a);
+	pb(stack_a, stack_b, 0);
+	rb(stack_b, 0);
+	if (max < size)
+		max++;
+	if (min < max)
+		min++;
+}
 
 /**
  * fill_stack_b _the function to fill stack_b by element
@@ -83,12 +83,13 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s)
 	{
 		if ((*stack_a)->index <= min_range)
 		{
-			pb(stack_a, stack_b, 0);
-			rb(stack_b, 0);
-			if (max_range < size)
-				max_range++;
-			if (min_range < max_range)
-				min_range++;
+			/*pb(stack_a, stack_b, 0);*/
+			/*rb(stack_b, 0);*/
+			/*if (max_range < size)*/
+			/*	max_range++;*/
+			/*if (min_range < max_range)*/
+			/*	min_range++;*/
+			helper_b(stack_a, stack_b, max_range, min_range);
 		}
 		else if ((*stack_a)->index >= min_range && (*stack_a)->index <= max_range)
 		{
