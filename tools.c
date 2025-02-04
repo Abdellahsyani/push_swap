@@ -92,3 +92,16 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b, int ch_s, int size)
 			ra(stack_a, 0);
 	}
 }
+
+/**
+ * ft_perror _ function to free and exit the program
+ * @str: the result of split if they fail
+ * @stack_a: the result of stack if they fail
+ */
+void	ft_perror(char **str, t_list **stack_a)
+{
+	free_stack(stack_a);
+	free_split_result(str);
+	ft_putstr("Error\n");
+	exit(1);
+}
